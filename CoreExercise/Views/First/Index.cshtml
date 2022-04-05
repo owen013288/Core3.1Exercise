@@ -1,0 +1,60 @@
+﻿@model CoreExercise.Models.CurrentUser 
+@using Microsoft.AspNetCore.Http;
+@using System.Text.Json;
+@{
+    ViewData["Title"] = "首頁";
+    CurrentUser userViewData = ViewData["User1"] as CurrentUser;
+    CurrentUser userViewBag = ViewBag.User;
+    CurrentUser userOther = ViewBag.User1;
+    CurrentUser userTemp = TempData["User"] as CurrentUser;
+    CurrentUser userSession = JsonSerializer.Deserialize<CurrentUser>(
+    Context.Session.GetString("CurrentUserSession"));
+}
+<h1>第一堂課程-傳值教學</h1>
+<div class="row">
+    <div class="col-md-12">
+        <h2>傳值教學</h2>
+        <hr />
+        <h3>使用ViewData</h3>
+        <h4>CurrentUser userViewData = ViewData["User1"] as CurrentUser;</h4>
+        <p>「ViewData["User1"]」：@ViewData["User1"]</p>
+        <p>「userViewData.Id」：@userViewData.Id</p>
+        <p>「userViewData.Name」：@userViewData.Name</p>
+        <p>「userViewData.LoginTime」：@userViewData.LoginTime</p>
+        <p>「ViewData["Something"]」：@ViewData["Something"] <span class="text-danger">「註：會被ViewBag替代」</span></p>
+        <hr />
+        <h3>使用ViewBag</h3>
+        <h4>CurrentUser userViewBag = ViewBag.User;</h4>
+        <p>「ViewBag.Name」：@ViewBag.Name</p>
+        <p>「userViewBag.Id」：@userViewBag.Id</p>
+        <p>「userViewBag.Name」：@userViewBag.Name</p>
+        <p>「userViewBag.LoginTime」：@userViewBag.LoginTime</p>
+        <p>ViewBag：@((CurrentUser)ViewBag.User)</p>
+        <p>「ViewBag.Something」：@ViewBag.Something <span class="text-danger">「註：取代ViewData」</span></p>
+        <hr />
+        <h4>CurrentUser userOther = ViewBag.User1;</h4>
+        <p>「userOther」：@(userOther)</p>
+        <h5 class="text-danger">以上結論，ViewData與ViewBag可以共用，後者會替代前者</h5>
+        <hr />
+        <h3>使用TempData</h3>
+        <h4>CurrentUser userTemp = TempData["User"] as CurrentUser;</h4>
+        <p>「userTemp.Id」：@userTemp.Id</p>
+        <p>「userTemp.Name」：@userTemp.Name</p>
+        <p>「userTemp.LoginTime」：@userTemp.LoginTime</p>
+        <hr />
+        <h3>使用Session</h3>
+        <h4>
+            CurrentUser userSession = Newtonsoft.Json.JsonConvert.DeserializeObject<CurrentUser>
+                (Context.Session.GetString("CurrentUserSession"));
+        </h4>
+        <p>「userSession.Id」：@userSession.Id</p>
+        <p>「userSession.Name」：@userSession.Name</p>
+        <p>「userSession.LoginTime」：@userSession.LoginTime</p>
+        <hr />
+        <h3>使用Model</h3>
+        <h4>@@model CoreExercise.Models.CurrentUser</h4>
+        <p>「Model.Id」：@Model.Id</p>
+        <p>「Model.Name」：@Model.Name</p>
+        <p>「Model.LoginTime」：@Model.LoginTime</p>
+    </div>
+</div>

@@ -3,10 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace CoreExercise
 {
@@ -22,12 +19,28 @@ namespace CoreExercise
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation(); ;
+            // 該怎麼用Session
+            services.AddSession();
+
+            // using System.Text.Json; => PropertyNamingPolicy
+            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(option =>
+            {
+                // WriteIndented：把 JSON 格式排版美化，預設 false，通常 Production 版本不會做這個設定。
+                option.JsonSerializerOptions.WriteIndented = true;
+                // PropertyNamingPolicy：可自訂序列反序列化的命名規則，可以指定為 JsonNamingPolicy.CamelCase，預設 null
+                // PropertyNameCaseInsensitive：預設 false，屬性名稱是否要忽略大小寫，通常設定了 JsonNamingPolicy.CamelCase 後，這個應該不需要特別設定，除非有特殊需求。
+                option.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                // IgnoreNullValues：忽略 null 值的屬性，預設 false。
+                option.JsonSerializerOptions.IgnoreNullValues = true;
+            }); ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // 表示請求需要使用Session
+            app.UseSession();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
