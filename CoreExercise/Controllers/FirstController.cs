@@ -1,6 +1,7 @@
 ﻿using CoreExercise.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Text.Json;
 
@@ -8,8 +9,21 @@ namespace CoreExercise.Controllers
 {
     public class FirstController : Controller
     {
+        // using Microsoft.Extensions.Logging; => ILogger
+        private readonly ILogger<FirstController> _logger;
+
+        // 依賴注入 -- 控制反轉
+        public FirstController(ILogger<FirstController> logger)
+        {
+            _logger = logger;
+
+            _logger.LogInformation("this is a logger info data");
+        }
+
         public IActionResult Index()
         {
+            this._logger.LogInformation("12345678");
+
             #region ViewData
             base.ViewData["User1"] = new CurrentUser()
             {

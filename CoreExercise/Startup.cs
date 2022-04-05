@@ -1,8 +1,10 @@
-using Microsoft.AspNetCore.Builder;
+ï»¿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using System.Text.Json;
 
 namespace CoreExercise
@@ -19,26 +21,29 @@ namespace CoreExercise
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // ¸Ó«ç»ò¥ÎSession
+            // è©²æ€éº¼ç”¨Session
             services.AddSession();
 
             // using System.Text.Json; => PropertyNamingPolicy
             services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(option =>
             {
-                // WriteIndented¡G§â JSON ®æ¦¡±Æª©¬ü¤Æ¡A¹w³] false¡A³q±` Production ª©¥»¤£·|°µ³o­Ó³]©w¡C
+                // WriteIndentedï¼šæŠŠ JSON æ ¼å¼æ’ç‰ˆç¾åŒ–ï¼Œé è¨­ falseï¼Œé€šå¸¸ Production ç‰ˆæœ¬ä¸æœƒåšé€™å€‹è¨­å®šã€‚
                 option.JsonSerializerOptions.WriteIndented = true;
-                // PropertyNamingPolicy¡G¥i¦Û­q§Ç¦C¤Ï§Ç¦C¤Æªº©R¦W³W«h¡A¥i¥H«ü©w¬° JsonNamingPolicy.CamelCase¡A¹w³] null
-                // PropertyNameCaseInsensitive¡G¹w³] false¡AÄİ©Ê¦WºÙ¬O§_­n©¿²¤¤j¤p¼g¡A³q±`³]©w¤F JsonNamingPolicy.CamelCase «á¡A³o­ÓÀ³¸Ó¤£»İ­n¯S§O³]©w¡A°£«D¦³¯S®í»İ¨D¡C
+                // PropertyNamingPolicyï¼šå¯è‡ªè¨‚åºåˆ—ååºåˆ—åŒ–çš„å‘½åè¦å‰‡ï¼Œå¯ä»¥æŒ‡å®šç‚º JsonNamingPolicy.CamelCaseï¼Œé è¨­ null
+                // PropertyNameCaseInsensitiveï¼šé è¨­ falseï¼Œå±¬æ€§åç¨±æ˜¯å¦è¦å¿½ç•¥å¤§å°å¯«ï¼Œé€šå¸¸è¨­å®šäº† JsonNamingPolicy.CamelCase å¾Œï¼Œé€™å€‹æ‡‰è©²ä¸éœ€è¦ç‰¹åˆ¥è¨­å®šï¼Œé™¤éæœ‰ç‰¹æ®Šéœ€æ±‚ã€‚
                 option.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                // IgnoreNullValues¡G©¿²¤ null ­ÈªºÄİ©Ê¡A¹w³] false¡C
+                // IgnoreNullValuesï¼šå¿½ç•¥ null å€¼çš„å±¬æ€§ï¼Œé è¨­ falseã€‚
                 option.JsonSerializerOptions.IgnoreNullValues = true;
             }); ;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        // using Microsoft.Extensions.Logging; => ILoggerFactory
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            // ªí¥Ü½Ğ¨D»İ­n¨Ï¥ÎSession
+            // using NLog.Extensions.Logging;
+            loggerFactory.AddNLog();
+
+            // è¡¨ç¤ºè«‹æ±‚éœ€è¦ä½¿ç”¨Session
             app.UseSession();
 
             if (env.IsDevelopment())
