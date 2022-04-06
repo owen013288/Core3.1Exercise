@@ -56,6 +56,7 @@ namespace CoreExercise
             }
             app.UseStaticFiles();
 
+            // 端口路由定義
             app.UseRouting();
 
             app.UseAuthorization();
