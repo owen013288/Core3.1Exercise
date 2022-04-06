@@ -63,9 +63,11 @@ namespace CoreExercise
 
             app.UseEndpoints(endpoints =>
             {
+                // 這裡修改開啟路徑
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    //pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Products}/{action=Index}/{id?}");
             });
         }
     }
