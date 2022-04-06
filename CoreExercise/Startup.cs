@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CoreExercise.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +24,16 @@ namespace CoreExercise
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // 添加Identity
+            // using CoreExercise.Models; => ApplicationDbContext
+            // using Microsoft.EntityFrameworkCore; => UseSqlServer
+            // using Microsoft.AspNetCore.Identity; => IdentityUser
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("ExerciseConnection")));
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             // 該怎麼用Session
             services.AddSession();
 
@@ -34,7 +47,10 @@ namespace CoreExercise
                 option.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 // IgnoreNullValues：忽略 null 值的屬性，預設 false。
                 option.JsonSerializerOptions.IgnoreNullValues = true;
-            }); ;
+
+                // 添加Identity
+                services.AddRazorPages();
+            });
         }
 
         // using Microsoft.Extensions.Logging; => ILoggerFactory
@@ -49,16 +65,27 @@ namespace CoreExercise
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                // 添加Identity
+                app.UseDatabaseErrorPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+
+                // 添加Identity
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
+            // 添加Identity
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             // 端口路由定義
             app.UseRouting();
 
+            // 添加Identity
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -68,6 +95,8 @@ namespace CoreExercise
                     name: "default",
                     //pattern: "{controller=Home}/{action=Index}/{id?}");
                     pattern: "{controller=Products}/{action=Index}/{id?}");
+                // 添加Identity
+                endpoints.MapRazorPages();
             });
         }
     }
