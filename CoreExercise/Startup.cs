@@ -109,39 +109,52 @@ namespace CoreExercise
             // using NLog.Extensions.Logging;
             loggerFactory.AddNLog();
 
-            // 表示請求需要使用Session
-            app.UseSession();
-
             if (env.IsDevelopment())
             {
+                // 開發者例外頁
                 app.UseDeveloperExceptionPage();
 
                 // 添加Identity
+                // 資料庫例外錯誤頁
                 app.UseDatabaseErrorPage();
             }
             else
             {
+                // 一般例外頁
                 app.UseExceptionHandler("/Home/Error");
 
                 // 添加Identity
+                // HTTP Strict Transport Security Protocol
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
-            // 添加Identity
+            // 將HTTP 轉向 HTTPS
             app.UseHttpsRedirection();
-            // //使用純靜態文件支持的中間件，而不使用帶有終端的中間件
+            // 使用純靜態文件支持的中間件，而不使用帶有終端的中間件
+            // 啟用靜態檔服務
             app.UseStaticFiles();
 
+            // 使用Cookie Policy
+            app.UseCookiePolicy();
+
             // 端口路由定義
+            // 使用路由
             app.UseRouting();
 
             // 添加Identity
             // UseAuthentication 將驗證 中介軟體 新增至要求管線。
+            // 身分驗證
             app.UseAuthentication();
+
             // 添加驗證中間件
+            // 授權驗證
             app.UseAuthorization();
 
+            // 表示請求需要使用Session
+            app.UseSession();
+
+            // 端口路由
             app.UseEndpoints(endpoints =>
             {
                 // 這裡修改開啟路徑
