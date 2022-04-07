@@ -130,6 +130,7 @@ namespace CoreExercise
 
             // 添加Identity
             app.UseHttpsRedirection();
+            // //使用純靜態文件支持的中間件，而不使用帶有終端的中間件
             app.UseStaticFiles();
 
             // 端口路由定義
@@ -138,6 +139,7 @@ namespace CoreExercise
             // 添加Identity
             // UseAuthentication 將驗證 中介軟體 新增至要求管線。
             app.UseAuthentication();
+            // 添加驗證中間件
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
