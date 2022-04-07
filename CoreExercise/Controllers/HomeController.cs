@@ -1,14 +1,13 @@
 ﻿using CoreExercise.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoreExercise.Controllers
 {
+    // using Microsoft.AspNetCore.Authorization; => Authorize
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,7 +17,27 @@ namespace CoreExercise.Controllers
             _logger = logger;
         }
 
+        // 允許匿名存取
+        [AllowAnonymous]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            // 利用Identity.Name 判斷是否為特定使用者
+            if (User.Identity.Name != "Owen013288@gmail.com")
+            {
+                return Content($"{User.Identity.Name}無權存取此Action動作方法!");
+            }
+
+            return View();
+        }
+
+        // 授權給特定角色
+        [Authorize(Roles = "Admin, Supervisor")]
+        public IActionResult Contact()
         {
             return View();
         }
