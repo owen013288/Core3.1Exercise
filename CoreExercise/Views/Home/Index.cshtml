@@ -1,3 +1,13 @@
-﻿@{
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration configuration
+@{
     ViewData["Title"] = "Home Page";
 }
+
+<h1>資料庫連線 @configuration["ConnectionStrings:ExerciseConnection"]</h1>
+<h2>自定義內容如下</h2>
+<ul>
+    <li>名字：@(configuration.GetValue<string>("customizeObj:Name"))</li>
+    <li>信箱：@(configuration.GetValue<string>("customizeObj:Email", "找不到Email"))</li>
+    <li>網址：@(configuration.GetSection("customizeObj:Website").Value)</li>
+</ul>
