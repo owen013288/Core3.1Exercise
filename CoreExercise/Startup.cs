@@ -25,6 +25,7 @@ namespace CoreExercise
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Identity
             // 添加Identity
             // using CoreExercise.Models; => ApplicationDbContext
             // using Microsoft.EntityFrameworkCore; => UseSqlServer
@@ -34,21 +35,6 @@ namespace CoreExercise
                     Configuration.GetConnectionString("ExerciseConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            // 該怎麼用Session
-            services.AddSession();
-
-            // using System.Text.Json; => PropertyNamingPolicy
-            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(option =>
-            {
-                // WriteIndented：把 JSON 格式排版美化，預設 false，通常 Production 版本不會做這個設定。
-                option.JsonSerializerOptions.WriteIndented = true;
-                // PropertyNamingPolicy：可自訂序列反序列化的命名規則，可以指定為 JsonNamingPolicy.CamelCase，預設 null
-                // PropertyNameCaseInsensitive：預設 false，屬性名稱是否要忽略大小寫，通常設定了 JsonNamingPolicy.CamelCase 後，這個應該不需要特別設定，除非有特殊需求。
-                option.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                // IgnoreNullValues：忽略 null 值的屬性，預設 false。
-                option.JsonSerializerOptions.IgnoreNullValues = true;
-            });
 
             // 添加Identity
             services.AddRazorPages();
@@ -101,6 +87,29 @@ namespace CoreExercise
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+            #endregion
+
+            #region 基本配置
+            // 該怎麼用Session
+            services.AddSession();
+
+            // using System.Text.Json; => PropertyNamingPolicy
+            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(option =>
+            {
+                // WriteIndented：把 JSON 格式排版美化，預設 false，通常 Production 版本不會做這個設定。
+                option.JsonSerializerOptions.WriteIndented = true;
+                // PropertyNamingPolicy：可自訂序列反序列化的命名規則，可以指定為 JsonNamingPolicy.CamelCase，預設 null
+                // PropertyNameCaseInsensitive：預設 false，屬性名稱是否要忽略大小寫，通常設定了 JsonNamingPolicy.CamelCase 後，這個應該不需要特別設定，除非有特殊需求。
+                option.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                // IgnoreNullValues：忽略 null 值的屬性，預設 false。
+                option.JsonSerializerOptions.IgnoreNullValues = true;
+            });
+            #endregion
+
+            // 在DI Container 中註冊CustomizeObj類別
+            services.Configure<CustomizeObj>(options =>
+            // 將組態繫結至 CustomizeObj 類別
+            Configuration.GetSection("CustomizeObj").Bind(options));
         }
 
         // using Microsoft.Extensions.Logging; => ILoggerFactory

@@ -3,11 +3,14 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-<h1>資料庫連線 @configuration["ConnectionStrings:ExerciseConnection"]</h1>
+<h1>Configuration組態</h1>
+<h2>資料庫連線 @configuration["ConnectionStrings:ExerciseConnection"]</h2>
 <h2>自定義內容如下</h2>
 <ul>
     <li>名字：@(configuration.GetValue<string>("CustomizeObj:Name"))</li>
     <li>信箱：@(configuration.GetValue<string>("CustomizeObj:Email", "找不到Email"))</li>
     <li>網址：@(configuration.GetSection("CustomizeObj:Website").Value)</li>
 </ul>
+<hr />
+<h1>透過Options選項模式讀取組態設定</h1>
+<partial name="_AccessCustomizeObj" />

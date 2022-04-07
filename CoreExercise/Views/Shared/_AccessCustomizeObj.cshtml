@@ -1,0 +1,13 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptionsMonitor<CustomizeObj> CustomizeObj
+@{
+    var customizeObj = CustomizeObj.CurrentValue;
+}
+
+<h1>資料庫連線 @customizeObj</h1>
+<h2>自定義內容如下</h2>
+<ul>
+    <li>名字：@customizeObj.Name</li>
+    <li>信箱：@customizeObj.Email</li>
+    <li>網址：@customizeObj.Website</li>
+</ul>
