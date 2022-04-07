@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
+using System;
 using System.Text.Json;
 
 namespace CoreExercise
@@ -47,9 +48,58 @@ namespace CoreExercise
                 option.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 // IgnoreNullValues：忽略 null 值的屬性，預設 false。
                 option.JsonSerializerOptions.IgnoreNullValues = true;
+            });
 
-                // 添加Identity
-                services.AddRazorPages();
+            // 添加Identity
+            services.AddRazorPages();
+
+            // 配置Identity
+            services.Configure<IdentityOptions>(options =>
+            {
+                // 密碼設置
+                // 密碼要有數字
+                options.Password.RequireDigit = true;
+                // 不一定要有小寫英文字母
+                options.Password.RequireLowercase = false;
+                // 不需要符號字元
+                options.Password.RequireNonAlphanumeric = false;
+                // 不需要有大寫英文字母
+                options.Password.RequireUppercase = false;
+                // 密碼至少要6個字元長
+                options.Password.RequiredLength = 6;
+                // 至少要有個字元不一樣
+                options.Password.RequiredUniqueChars = 6;
+
+                // 鎖定配置
+                // using System; => TimeSpan
+                // 5分鐘沒有動靜就自動鎖住定網站，預設5分鐘
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                // 三次密碼誤就鎖定網站, 預設5次
+                options.Lockout.MaxFailedAccessAttempts = 3;
+                // 新增的使用者也會被鎖定，就是犯規沒有新人優待
+                options.Lockout.AllowedForNewUsers = true;
+
+                // 使用者配置
+                // 取得或設定用來驗證使用者名稱的使用者名稱中允許的字元清單。
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                // 郵箱不能重覆使用
+                options.User.RequireUniqueEmail = true;
+            });
+
+            // Seting the Account Login page 
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                // 開啟避免XSS攻擊讀取Cookie
+                options.Cookie.HttpOnly = true;
+                // 控制 cookie 要多少時間才能從其建立點起保持有效。 過期資訊位於受保護的 cookie 票券中。
+                // 因此，即使在瀏覽器應該加以清除之後會傳送至伺服器，會忽略過期的 cookie。
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
             });
         }
 
@@ -77,6 +127,7 @@ namespace CoreExercise
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             // 添加Identity
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -85,6 +136,7 @@ namespace CoreExercise
             app.UseRouting();
 
             // 添加Identity
+            // UseAuthentication 將驗證 中介軟體 新增至要求管線。
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -95,6 +147,7 @@ namespace CoreExercise
                     name: "default",
                     //pattern: "{controller=Home}/{action=Index}/{id?}");
                     pattern: "{controller=Products}/{action=Index}/{id?}");
+
                 // 添加Identity
                 endpoints.MapRazorPages();
             });
