@@ -1,0 +1,177 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>IWebHostEnvironment</h1>
+<code>
+    private readonly IWebHostEnvironment _env;
+    <br />
+    public SecondController(IWebHostEnvironment env)
+    {
+    _env = env;
+    }
+    <br />
+    protected string WebRootPath { get { return _env.WebRootPath; } }
+</code>
+<br />
+<br />
+<p>測試環境：_env.EnvironmentName ：@ViewData["EnvironmentName"]</p>
+<p>絕對路徑到靜態文件：_env.WebRootPath ： @ViewData["WebRootPath"]</p>
+<p>不曉得：_env.WebRootFileProvider ： @ViewData["WebRootFileProvider"]</p>
+<p>絕對路徑到根目錄：_env.ContentRootPath ： @ViewData["ContentRootPath"]</p>
+<p>不曉得：_env.ContentRootFileProvider ： @ViewData["ContentRootFileProvider"]</p>
+<p>專案名稱：_env.ApplicationName ： @ViewData["ApplicationName"]</p>
+<p>WebRootPath ： @ViewData["pro_WebRootPath"]</p>
+
+<p>透過WebRootPath，上傳檔案</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <input class="form-control" type="file" id="UploadFile" value="選擇檔案" />
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-success" onclick="UploadFile()">上傳檔案</button>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered w-100">
+        <thead>
+            <tr class="text-center">
+                <th>No</th>
+                <th>檔案名稱</th>
+                <th>功能</th>
+            </tr>
+        </thead>
+        <tbody id="TFile">
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(() => {
+        GetFile();
+    })
+
+    /**
+     * 取得PDF文件
+     * */
+    function GetFile() {
+        let localFile = $('#TFile');
+
+        var r = $.ajax({
+            type: 'GET',
+            async: false,
+            url: '@Url.Action("GetFile")',
+            success: function (result) {
+                return result;
+            }
+        })
+        var localFileHtml = '';
+        r.responseJSON.forEach((item, index) => {
+            localFileHtml += `
+            <tr>
+                <td class="text-center">${index + 1}</td>
+                <td>${item}</td>
+                <td class="text-center">
+                    <input type="button" value="刪除" class="btn btn-danger"  onclick="DeleteFile('${item}')" />
+                </td>
+            </tr>`;
+        })
+
+        localFile.html(localFileHtml);
+    }
+
+    /**
+     * 上傳PDF文件
+     * */
+    function UploadFile() {
+        if (document.getElementById('UploadFile').files[0] === undefined) {
+            Swal.fire({
+                icon: 'error',
+                text: '請選擇檔案!'
+            })
+            return;
+        }
+
+        Swal.fire({
+            title: "您確定要上傳嗎？",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定上傳。'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var input = document.getElementById("UploadFile");
+                var formData = new FormData();
+                formData.append("UploadFile", input.files[0]);
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("UploadFile")',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    async: false,
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                text: result.response
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                text: result.response
+                            })
+                        }
+                    }
+                });
+
+                GetFile();
+            }
+        });
+    }
+
+    /**
+     * 刪除PDF文件
+     * @@param {string} fileName
+     */
+    function DeleteFile(fileName) {
+        Swal.fire({
+            title: "您確定要刪除<br/>『" + fileName + "』嗎？",
+            text: "刪除後無法回復！",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定刪除。'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeleteFile")',
+                    data: {
+                        "fileName": fileName
+                    },
+                    async: false,
+                    success: function (result) {
+                        if (result.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                text: result.response
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                text: result.response
+                            })
+                        }
+                    }
+                });
+
+                GetFile();
+            }
+        });
+    }
+</script>
