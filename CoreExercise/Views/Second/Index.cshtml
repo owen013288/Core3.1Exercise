@@ -1,15 +1,35 @@
-﻿@{
+﻿@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
+    string DisplayEnvironment(string envName) =>
+        envName switch
+        {
+            "Development" => "開發環境",
+            "Staging" => "預備環境",
+            "Production" => "生產環境",
+            _ => "其他環境"
+        };
+}
+<h1>目前的環境是： @DisplayEnvironment(env.EnvironmentName)</h1>
+<environment include="Development">
+    <h2>使用「environment標籤」，include="Development"，開發環境才會出現</h2>
+</environment>
+<environment include="Staging">
+    <h2>使用「environment標籤」，include="Staging"，預備環境才會出現</h2>
+</environment>
+<environment include="Production">
+    <h2>使用「environment標籤」，include="Production"，生產環境才會出現</h2>
+</environment>
+<hr />
 <h1>IWebHostEnvironment</h1>
 <code>
     private readonly IWebHostEnvironment _env;
     <br />
     public SecondController(IWebHostEnvironment env)
     {
-    _env = env;
+        _env = env;
     }
     <br />
     protected string WebRootPath { get { return _env.WebRootPath; } }
@@ -23,7 +43,7 @@
 <p>不曉得：_env.ContentRootFileProvider ： @ViewData["ContentRootFileProvider"]</p>
 <p>專案名稱：_env.ApplicationName ： @ViewData["ApplicationName"]</p>
 <p>WebRootPath ： @ViewData["pro_WebRootPath"]</p>
-
+<hr />
 <p>透過WebRootPath，上傳檔案</p>
 <div class="container">
     <div class="row">
