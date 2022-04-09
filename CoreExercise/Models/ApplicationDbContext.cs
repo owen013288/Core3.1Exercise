@@ -9,5 +9,7 @@ namespace CoreExercise.Models
             : base(options)
         {
         }
+
+        public DbSet<Friends> Friends { get; set; }
     }
 }
