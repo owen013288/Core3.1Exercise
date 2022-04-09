@@ -137,6 +137,8 @@ namespace CoreExercise
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            //當用戶輸入的網址找不到時↓
+            app.UseStatusCodePagesWithRedirects("~/Error/404.html");
 
             // 將HTTP 轉向 HTTPS
             app.UseHttpsRedirection();
