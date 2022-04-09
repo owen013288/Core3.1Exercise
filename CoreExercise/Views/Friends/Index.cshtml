@@ -3,7 +3,15 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h2>@ViewData["Test1"]</h2>
+<h2>@ViewBag.Test2</h2>
+@if (TempData.ContainsKey("test3"))
+{
 
+    <h2>使用TempData.ContainsKey("test3")</h2>
+    <p>若存在，則顯示以下內容</p>
+    <p>@TempData["Test3"]</p>
+}
 <div class="jumbotron bg-info">
     <h1>朋友頁面</h1>
 </div>
@@ -30,26 +38,27 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning m-md-1">編輯</a>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info m-md-1">細節</a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger m-md-1">刪除</a>
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning m-md-1">編輯</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info m-md-1">細節</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger m-md-1">刪除</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

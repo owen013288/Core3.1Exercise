@@ -94,5 +94,20 @@ namespace CoreExercise.Controllers
             });
             #endregion
         }
+
+        /// <summary>
+        /// 轉向測試
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult RedirectToOtherAction()
+        {
+            // ViewData、ViewBag 不能用在轉向
+            ViewData["Test1"] = "test1";
+            ViewBag.Test2 = "test2";
+            // TempData 可以用在轉向，但轉完後重新整理則消失
+            TempData["Test3"] = "test3";
+            
+            return RedirectToAction("Index", "Friends");
+        }
     }
 }

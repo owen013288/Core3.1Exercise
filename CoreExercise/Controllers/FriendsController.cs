@@ -20,6 +20,8 @@ namespace CoreExercise.Controllers
         // using System.Threading.Tasks; => Task
         public async Task<IActionResult> Index()
         {
+            // 添加這個後重新整理，不會消失
+            TempData.Keep("test3");
             return View(await _context.Friends.ToListAsync());
         }
 
