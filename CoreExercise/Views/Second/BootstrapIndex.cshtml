@@ -33,3 +33,33 @@
     <i class="bi-alarm" style="color: red;font-size: 2rem;"></i>
     <i class="bi bi-alarm-fill"></i>
 </div>
+<hr />
+<div class="alert alert-primary">Carousel元件</div>
+<div id="carouselControlID" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselControlID" data-bs-slide-to="0" class="active" 
+                aria-current="true" 
+                aria-label="馬爾代夫"></button>
+        <button type="button" data-bs-target="#carouselControlID" data-bs-slide-to="1" aria-label="加拿大"></button>
+        <button type="button" data-bs-target="#carouselControlID" data-bs-slide-to="2" aria-label="溫哥華"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="1000">
+            <img src="../images/Maldives.jpg" class="d-block w-100" alt="馬爾代夫">
+        </div>
+        <div class="carousel-item" data-bs-interval="1000">
+            <img src="../images/Canada.jpg" class="d-block w-100" alt="加拿大">
+        </div>
+        <div class="carousel-item" data-bs-interval="1000">
+            <img src="../images/Vancouver.jpg" class="d-block w-100" alt="溫哥華">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselControlID" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselControlID" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
