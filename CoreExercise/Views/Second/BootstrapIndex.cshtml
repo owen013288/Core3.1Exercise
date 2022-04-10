@@ -127,10 +127,63 @@
 <p class="bg-danger p-3 mb-1">始制文字 乃服衣裳 推位讓國 有虞陶唐 弔民伐罪</p>
 
 <!--Text文字對齊-->
-<div id="text" class="alert alert-primary">Text文字</div>
+<div class="alert alert-primary">Text文字</div>
 
 <p class="text-left">文字靠左對齊</p>
 <p class="text-center">文字置中對齊</p>
 <p class="text-right">文字靠右對齊</p>
 <p class="text-justify">文字左右對齊 -- 天地玄黃。宇宙洪荒。日月盈昃。辰宿列張。寒來暑往。秋收冬藏。閏餘成歲。律呂調陽。雲騰致雨。露結為霜。</p>
 <p class="text-nowrap">文字不換行 -- 天地玄黃。宇宙洪荒。日月盈昃。辰宿列張。寒來暑往。秋收冬藏。閏餘成歲。律呂調陽。雲騰致雨。露結為霜。</p>
+
+<!-- Modal對話視窗 -->
+<!-- Button trigger modal -->
+<div class="alert alert-primary">Modal對話視窗</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalControl">
+    開啟Modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade $modal-fade-transform: scale(3)" id="ModalControl" tabindex="-1" aria-labelledby="ModalControlLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal標題</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">.col-md-4</div>
+                        <div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 ms-auto">.col-md-3 .ms-auto</div>
+                        <div class="col-md-2 ms-auto">.col-md-2 .ms-auto</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 ms-auto">.col-md-6 .ms-auto</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            Level 1: .col-sm-9
+                            <div class="row">
+                                <div class="col-8 col-sm-6">
+                                    Level 2: .col-8 .col-sm-6
+                                </div>
+                                <div class="col-4 col-sm-6">
+                                    Level 2: .col-4 .col-sm-6
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">儲存</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+            </div>
+        </div>
+    </div>
+</div>
