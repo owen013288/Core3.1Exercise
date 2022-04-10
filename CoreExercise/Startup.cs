@@ -96,7 +96,7 @@ namespace CoreExercise
             // using System.Text.Json; => PropertyNamingPolicy
             services.AddControllersWithViews().AddRazorRuntimeCompilation()
                 // 將TempData Provider 由 Cookie 改成 Session
-                //.AddSessionStateTempDataProvider()
+                .AddSessionStateTempDataProvider()
                 .AddJsonOptions(option =>
             {
                 // WriteIndented：把 JSON 格式排版美化，預設 false，通常 Production 版本不會做這個設定。
