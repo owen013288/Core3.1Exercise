@@ -1,6 +1,11 @@
 ﻿@{
     ViewData["Title"] = "BootstrapIndex";
 }
+<style>
+    i {
+        font-style: normal;
+    }
+</style>
 <h1>Bootstrap練習</h1>
 
 <div class="alert alert-primary">卡片教學</div>
@@ -27,18 +32,22 @@
         </div>
     </div>
 </div>
+
 <hr />
+
 <div class="alert alert-primary">字體圖標</div>
 <div>
     <i class="bi-alarm" style="color: red;font-size: 2rem;"></i>
     <i class="bi bi-alarm-fill"></i>
 </div>
+
 <hr />
+
 <div class="alert alert-primary">Carousel元件</div>
 <div id="carouselControlID" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselControlID" data-bs-slide-to="0" class="active" 
-                aria-current="true" 
+        <button type="button" data-bs-target="#carouselControlID" data-bs-slide-to="0" class="active"
+                aria-current="true"
                 aria-label="馬爾代夫"></button>
         <button type="button" data-bs-target="#carouselControlID" data-bs-slide-to="1" aria-label="加拿大"></button>
         <button type="button" data-bs-target="#carouselControlID" data-bs-slide-to="2" aria-label="溫哥華"></button>
@@ -63,3 +72,65 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+
+<hr />
+
+<div class="alert alert-primary">Input-group元件</div>
+<div class="input-group mb-3">
+    <span class="input-group-text"><i class="bi bi-person"></i></span>
+    <input type="text" class="form-control" placeholder="請輸入姓名" aria-label="Username">
+    <div class="input-group-append">
+        <span class="input-group-text">姓名</span>
+    </div>
+</div>
+<div class="input-group mb-3">
+    <span class="input-group-text"><i class="bi bi-telephone-fill">電話</i></span>
+    <input type="text" class="form-control" placeholder="請輸入電話" aria-label="Telephone">
+</div>
+
+<hr />
+
+<div class="alert alert-primary">字體顏色</div>
+<!--內建Color顏色-->
+<p class="text-primary">.text-primary</p>
+<p class="text-secondary">.text-secondary</p>
+<p class="text-success">.text-success</p>
+<p class="text-danger">.text-danger</p>
+<p class="text-warning">.text-warning</p>
+<p class="text-info">.text-info</p>
+<p class="text-light bg-dark">.text-light</p>
+<p class="text-dark">.text-dark</p>
+<p class="text-body">.text-body</p>
+<p class="text-muted">.text-muted</p>
+<p class="text-white bg-dark">.text-white</p>
+<p class="text-black-50">.text-black-50</p>
+<p class="text-white-50 bg-dark">.text-white-50</p>
+
+<!--link with color-->
+<p><a href="#" class="text-primary">Primary link</a></p>
+<p><a href="#" class="text-secondary">Secondary link</a></p>
+<p><a href="#" class="text-success">Success link</a></p>
+<p><a href="#" class="text-danger">Danger link</a></p>
+<p><a href="#" class="text-warning">Warning link</a></p>
+<p><a href="#" class="text-info">Info link</a></p>
+<p><a href="#" class="text-light bg-dark">Light link</a></p>
+<p><a href="#" class="text-dark">Dark link</a></p>
+<p><a href="#" class="text-muted">Muted link</a></p>
+<p><a href="#" class="text-white bg-dark">White link</a></p>
+
+<br />
+<!--Contextual backgrounds情境背景顏色-->
+<p class="bg-primary text-white p-3 mb-1">天地玄黃 宇宙洪荒 日月盈昃 辰宿列張 寒來暑往</p>
+<p class="bg-success p-3 mb-1">秋收冬藏 閏餘成歲 律呂調陽 雲騰致雨 露結為霜</p>
+<p class="bg-info p-3 mb-1">金生麗水 玉出崑岡 劍號巨闕 珠稱夜光 果珍李柰</p>
+<p class="bg-warning text-white p-3 mb-1">菜重芥薑 海鹹河淡 麟潛羽翔 龍獅火帝 鳥官人皇</p>
+<p class="bg-danger p-3 mb-1">始制文字 乃服衣裳 推位讓國 有虞陶唐 弔民伐罪</p>
+
+<!--Text文字對齊-->
+<div id="text" class="alert alert-primary">Text文字</div>
+
+<p class="text-left">文字靠左對齊</p>
+<p class="text-center">文字置中對齊</p>
+<p class="text-right">文字靠右對齊</p>
+<p class="text-justify">文字左右對齊 -- 天地玄黃。宇宙洪荒。日月盈昃。辰宿列張。寒來暑往。秋收冬藏。閏餘成歲。律呂調陽。雲騰致雨。露結為霜。</p>
+<p class="text-nowrap">文字不換行 -- 天地玄黃。宇宙洪荒。日月盈昃。辰宿列張。寒來暑往。秋收冬藏。閏餘成歲。律呂調陽。雲騰致雨。露結為霜。</p>
