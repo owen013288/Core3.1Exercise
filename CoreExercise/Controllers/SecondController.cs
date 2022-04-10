@@ -19,6 +19,11 @@ namespace CoreExercise.Controllers
 
         protected string WebRootPath { get { return _env.WebRootPath; } }
 
+        public IActionResult BootstrapIndex()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             // 顯示環境名稱
