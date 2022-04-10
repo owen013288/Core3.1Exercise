@@ -8,15 +8,20 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/limonte-sweetalert2/sweetalert2.css" rel="stylesheet" />
     <style>
-        @@media screen and (max-width: 992px){
+        @@media screen and (max-width: 992px) {
             .nav-item {
                 background-color: rgba(0, 255, 255, 0.5);
             }
                 .nav-item:hover {
                     background-color: rgba(0, 255, 255, 1);
                 }
+
             .dropdown-menu li:hover > a {
                 background-color: rgba(0, 255, 255, 1) !important;
+            }
+
+            .searchForm {
+                margin-top: 10px;
             }
         }
     </style>
@@ -66,6 +71,12 @@
                                 <a class="nav-link text-dark ms-3" asp-area="" asp-controller="Friends" asp-action="Index">Controller學習</a>
                             </li>
                         </ul>
+                    </div>
+                    <div class="navbar-nav ms-auto searchForm">
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="search" placeholder="搜尋" aria-label="Search">
+                            <button class="btn btn-success text-nowrap" type="submit">搜尋</button>
+                        </form>
                     </div>
                 </div>
             </div>
