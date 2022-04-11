@@ -1,4 +1,7 @@
-﻿using CoreExercise.Models;
+﻿using CoreExercise.Helper;
+using CoreExercise.IService;
+using CoreExercise.Models;
+using CoreExercise.Serivce;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -113,6 +116,17 @@ namespace CoreExercise
             services.Configure<CustomizeObj>(options =>
             // 將組態繫結至 CustomizeObj 類別
             Configuration.GetSection("CustomizeObj").Bind(options));
+
+            #region 寄信配置
+            // using CoreExercise.Serivce; => EmailSettings
+            services.Configure<EmailSettings>(options =>
+            {
+                // using CoreExercise.Helper; => SysConfig
+                options.CfgFile(SysConfig.ConfgFilePath);
+            })
+                // using CoreExercise.IService; => IEmailSender
+                .AddSingleton<IEmailSender, EmailSender>();
+            #endregion
         }
 
         // using Microsoft.Extensions.Logging; => ILoggerFactory

@@ -73,6 +73,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark ms-3" asp-area="" asp-controller="Friends" asp-action="Index">Controller學習</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark ms-3" asp-area="" asp-controller="AdditionalLearn" asp-action="Index">額外學習</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="navbar-nav ms-auto searchForm">
@@ -103,5 +106,12 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <partial name="_ValidationScriptsPartial" />
     @RenderSection("Scripts", required: false)
+
+    @if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+            alert('@Html.Raw(TempData["message"])');
+        </script>
+    }
 </body>
 </html>

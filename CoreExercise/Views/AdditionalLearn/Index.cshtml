@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-3">
+    <form asp-action="SendEmail" class="row" method="post">
+        <div class="col-md-4">
+            <h2>寄信功能：</h2>
+        </div>
+        <button class="btn btn-success col-md-2" type="submit">送出</button>
+    </form>
+</div>
+

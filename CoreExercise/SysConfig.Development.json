@@ -1,0 +1,19 @@
+{
+  "MailBcc": [],
+  "ContactUsEmail": [
+    "owen013288@eri.com.tw"
+  ],
+  "SiteName": "NetCore3.1練習寄信功能",
+  "ContactPhone": null,
+  "SupportPhone": null,
+  "UpdateDt": "2022-03-02T00:00:00",
+  "Sender": "NetCore_sys@eri.com.tw",
+  "StmpServer": {
+    "MailServer": "mailgw.eri.com.tw",
+    "MailPort": 25,
+    "SenderName": "",
+    "Sender": "NetCore_sys@eri.com.tw",
+    "Password": "",
+    "UseSSL": false
+  }
+}

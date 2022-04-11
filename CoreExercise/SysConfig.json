@@ -1,0 +1,22 @@
+{
+  "MailBcc": [],
+  "ContactUsEmail": [
+    "owen013288@eri.com.tw"
+  ],
+  "SiteName": "全國不用品藏寶地圖",
+  "ContactPhone": null,
+  "SupportPhone": null,
+  "UpdateDt": "2022-03-02T00:00:00",
+  "CityMapWeb": "新北市,新北不塑之客友善地圖,https://www.chinglan.com.tw/ntcepb-plastic/\n新竹市,新竹市向前行-二手物品再利用,https://www.ihc-recycle.com.tw/reduce/second_hand_shops/list\n臺中市,臺中市政府環境保護局資源回收網,https://recycle.epb.taichung.gov.tw/maps/maps_01.asp\n嘉義縣,嘉義縣二手物市場尋寶地圖,https://cyepb.cyhg.gov.tw/cp.aspx?n=B8AFB48DD2C3C988&s=2A3BFF5F05B9DCE3\n台南市,臺南資心回收地圖網,https://epb3.tnepb.gov.tw/recyclemap/\n高雄市,高雄城市尋寶地圖網,http://ksepb.clweb.com.tw/ksepb-city-map/\n屏東縣,屏東縣二手物市場尋寶地圖,https://www.google.com/maps/d/edit?mid=1r2tBOKyA6XOtBRtMhtOaDiXR8Cjau4Uf&usp=sharing\n宜蘭縣,甩廢地圖,https://www.google.com/maps/d/u/0/edit?mid=10UYmEeMWPE0UJejwrJ6Lbhu68u8fugZq&ll=24.72667924358398%2C121.7990599&z=11\n花蓮縣,資源回收資訊網,http://hlepb.clweb.com.tw/recycleHL/mode02.asp?m=201904111020361&t=sub\n澎湖縣,二手物菊寶市集,https://www.facebook.com/groups/351330825790574\n金門縣,金門環保地圖,https://www.google.com/maps/d/edit?mid=1qTLncvIMtlGCiiT8cNgIYAf5cAEGlmVM&usp=sharing",
+  "RelatedWeb": "GC贈物網,https://www.give-circle.com/\n以物易物交換網,https://www.e1515.com.tw/\niGoods 愛物資,http://igoods.tw/\nTaptot,https://www.taptot.com/\n跳蚤本舖,http://www.bbbobo.com.tw/\n跳蚤屋,https://www.easysell.com.tw/\n蚤樂趣,https://www.sofun.com.tw/usedcust/",
+  "MarketNews": "",
+  "Sender": "utmap_sys@epa.gov.tw",
+  "StmpServer": {
+    "MailServer": "a0-smtp",
+    "MailPort": 25,
+    "SenderName": "",
+    "Sender": "utmap_sys@epa.gov.tw",
+    "Password": "",
+    "UseSSL": false
+  }
+}
