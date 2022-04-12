@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration config
+@{
     ViewData["Title"] = "Index";
 }
 
@@ -32,11 +33,11 @@
     <p>@@{ var score = 96;}</p>
     <p>@@if (score > 60)</p>
     <p>{</p>
-    <p style="text-indent: 2em;">@@(score)分：成績不及格</p>
+    <p>@@(score)分：成績不及格</p>
     <p>}</p>
     <p>else</p>
     <p>{</p>
-    <p style="text-indent: 2em;">@@(score)分：成績及格</p>
+    <p>@@(score)分：成績及格</p>
     <p>}</p>
 </code>
 @{ var score = 96;}
@@ -51,5 +52,64 @@ else
 
 
 <div class="jumbotron alert-success">
-    <h2>if...else條件判斷式</h2>
+    <h2>RenderSection搭配section</h2>
 </div>
+@{ var html =
+      @"@section topCss{
+<style>
+body {
+font - size: 2rem;
+}
+</style>
+}";
+}
+<code>
+    @html
+</code>
+@section topCss{
+    <style>
+        body {
+            font-size: 2rem;
+        }
+        p {
+            text-indent: 2em;
+        }
+    </style>
+}
+
+<div class="jumbotron alert-success">
+    <h2>@@functions</h2>
+</div>
+<code>
+@@functions
+{
+    <p>public string Name = "聖殿祭司";</p>
+
+    <p>public string RealName { get; } = "奚江華";</p>
+
+    <p>public string GetPhoneNumber() { return "0925-123-123"; }</p>
+
+    <p>public string BookTitle() { return @@config["Book:Title"] ?? "查無資料"; }</p>
+}
+</code>
+@functions
+{
+    public string Name = "聖殿祭司";
+
+    public string RealName { get; } = "奚江華";
+
+    public string GetPhoneNumber()
+    {
+        return "0925-123-123";
+    }
+
+    public string BookTitle()
+    {
+        return @config["Book:Title"] ?? "查無資料";
+    }
+}
+
+<h2>書名 : @BookTitle()</h2>
+<p>筆名 : @Name</p>
+<p>姓名 : @RealName</p>
+<p>電話 : @GetPhoneNumber()</p>
