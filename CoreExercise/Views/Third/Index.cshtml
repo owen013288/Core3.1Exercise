@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="jumbotron alert-success">
+    <h2>Razor語法規則</h2>
+</div>
+@{
+    var Name = "Kevin";
+    var Height = 180;
+    var Weight = 75;
+}
+<!--4.Inline Expression-->
+<code>
+    <p>var Name = "Kevin";</p>
+    <p>var Height = 180;</p>
+    <p>var Weight = 75;</p>
+    <p>我的名字: @@Name </p>
+    <p>我的身高: @@Height </p>
+    <p>我的體重: @@Weight </p>
+    <p>@@((DateTime.Now - TimeSpan.FromDays(4)).ToShortDateString()) </p>
+</code>
+<p>我的名字: @Name </p>
+<p>我的身高: @Height </p>
+<p>我的體重: @Weight </p>
+<p>@((DateTime.Now - TimeSpan.FromDays(4)).ToShortDateString()) </p>
+
+<div class="jumbotron alert-success">
+    <h2>if...else條件判斷式</h2>
+</div>
+<code>
+    <p>@@{ var score = 96;}</p>
+    <p>@@if (score > 60)</p>
+    <p>{</p>
+    <p style="text-indent: 2em;">@@(score)分：成績不及格</p>
+    <p>}</p>
+    <p>else</p>
+    <p>{</p>
+    <p style="text-indent: 2em;">@@(score)分：成績及格</p>
+    <p>}</p>
+</code>
+@{ var score = 96;}
+@if (score > 60)
+{
+    <p>@(score)分：成績不及格</p>
+}
+else
+{
+    <p>@(score)分：成績及格</p>
+}
+
+
+<div class="jumbotron alert-success">
+    <h2>if...else條件判斷式</h2>
+</div>
