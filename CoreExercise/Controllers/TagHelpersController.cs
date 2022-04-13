@@ -1,12 +1,20 @@
 ﻿using CoreExercise.IService;
 using CoreExercise.Models;
+using CoreExercise.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoreExercise.Controllers
 {
     public class TagHelpersController : Controller
     {
+        private readonly ICityService _cityService;
+        public TagHelpersController(ICityService cityService)
+        {
+            _cityService = cityService;
+        }
+
         //C# 6.0 - Auto Property Initializer
         public List<Hero> heros { get; } = new List<Hero>
         {
@@ -23,6 +31,67 @@ namespace CoreExercise.Controllers
         public IActionResult PartialTagHelper()
         {
             return View(heros);
+        }
+
+        public IActionResult SelectTagHelper()
+        {
+            var model = new CountryViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SelectTagHelper(CountryViewModel countryVM)
+        {
+            if (ModelState.IsValid)
+            {
+                //讀取國家代碼
+                string countryCode = countryVM.Country;
+
+                //由國家代碼查詢名稱
+                string country = countryVM.Countries.Where(c => c.Value == countryCode).Select(x => x.Text).FirstOrDefault();
+
+                return RedirectToAction("DisplayCountry", new { Country = country });
+            }
+
+            return View(countryVM);
+        }
+
+        //顯示Country資訊
+        public IActionResult DisplayCountry(string country)
+        {
+            if (string.IsNullOrEmpty(country))
+            {
+                return Content("必須提供Country參數!");
+            }
+
+            ViewData["Country"] = country;
+
+            return View();
+        }
+
+        public IActionResult SelectEnum()
+        {
+            var model = new CountryEnumViewModel();
+
+            //以下是設定列舉預設值
+            //model.EnumerateCountry = CountryEnum.France;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SelectEnum(int EnumerateCountry)
+        {
+            if (ModelState.IsValid)
+            {
+                //顯示Country名稱
+                return RedirectToAction("DisplayCountry", new { Country = (CountryEnum)EnumerateCountry });
+            }
+
+            return View();
         }
     }
 }

@@ -118,6 +118,7 @@ namespace CoreExercise
             Configuration.GetSection("CustomizeObj").Bind(options));
 
             services.AddSingleton<IUtility, Utility>();
+            services.AddSingleton<ICityService, TaiwanCityService>();
 
             #region 寄信配置
             // using CoreExercise.Serivce; => EmailSettings

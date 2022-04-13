@@ -1,0 +1,23 @@
+﻿@model CountryViewModel
+@{
+    ViewData["Title"] = "SelectTagHelper";
+
+}
+
+<h1>SelectTagHelper</h1>
+
+<form asp-controller="TagHelpers" asp-action="SelectTagHelper" method="post">
+    <label asp-for="Country"></label>
+    <select asp-for="Country" asp-items="Model.Countries">
+        <option value="">==請選擇國家==</option>
+    </select>
+    <span asp-validation-for="Country" class="text-danger"></span>
+    <br /><br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section endJS
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

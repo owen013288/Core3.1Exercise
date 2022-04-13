@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "DisplayCountry";
+}
+
+
+你選擇的國家為: @ViewData["Country"]
+
+<br /><br />
+
+<a href="@ViewContext.HttpContext.Request.Headers["Referer"].ToString()" class="btn btn-primary">Back返回上一頁</a>
