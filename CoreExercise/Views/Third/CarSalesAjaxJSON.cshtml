@@ -8,10 +8,10 @@
 </div>
 
 <select id="urlSelect" class="form-control">
-    <option value="http://localhost:49698/JsonDataApi/GetCarSalesNumber">同專案的JsonDataApi/GetCarSalesNumber</option>
-    <option value="http://localhost:49698/JsonDataApi/GetCarSalesNumberRandom">同專案的JsonDataApi/GetCarSalesNumberRandom</option>
-    <option value='http://localhost:44310/cars'>另一個ASP.NET Core Web API專案api/cars</option>
-    <option value="http://172.20.10.2/WebApiServices/api/cars">IIS伺服器上的Web API</option>
+    <option value="http://localhost:49696/JsonDataApi/GetCarSalesNumber">同專案的JsonDataApi/GetCarSalesNumber</option>
+    <option value="http://localhost:49696/JsonDataApi/GetCarSalesNumberRandom">同專案的JsonDataApi/GetCarSalesNumberRandom</option>
+    <option value='https://localhost:44310/api/cars'>另一個ASP.NET Core Web API專案api/cars</option>
+    <option value="https://172.20.10.2/WebApiServices/api/cars">IIS伺服器上的Web API</option>
 </select>
 
 <button class="btn btn-warning" id="get">以.get()呼叫遠端API</button>
@@ -20,7 +20,6 @@
 <button class="btn btn-danger" id="reset">Reset</button>
 
 <div id="urlText" class="alert alert-info"></div>
-
 
 <div class="card" id="cardPanel">
     <div class="card-header">
@@ -63,6 +62,7 @@
         var jsArray = null;
         function JsonDataHandler(response) {
             if (response != null) {
+                console.log(response)
                 //將回傳的JSON資料指定給jsArray
                 jsArray = response;
                 document.getElementById("cardPanel").style.display = "block";
