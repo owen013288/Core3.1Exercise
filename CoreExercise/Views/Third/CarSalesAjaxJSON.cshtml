@@ -1,0 +1,223 @@
+﻿@inject IUtility _utility
+@{
+    ViewData["Title"] = "CarSalesAjaxJSON";
+}
+
+<div class="jumbotron alert-success p-3">
+    <h3>以jQuery Ajax呼叫各種類型遠端API，取回JSON格式的汽車銷售資料</h3>
+</div>
+
+<select id="urlSelect" class="form-control">
+    <option value="http://localhost:49698/JsonDataApi/GetCarSalesNumber">同專案的JsonDataApi/GetCarSalesNumber</option>
+    <option value="http://localhost:49698/JsonDataApi/GetCarSalesNumberRandom">同專案的JsonDataApi/GetCarSalesNumberRandom</option>
+    <option value='http://localhost:44310/cars'>另一個ASP.NET Core Web API專案api/cars</option>
+    <option value="http://172.20.10.2/WebApiServices/api/cars">IIS伺服器上的Web API</option>
+</select>
+
+<button class="btn btn-warning" id="get">以.get()呼叫遠端API</button>
+<button class="btn btn-success" id="post">以.post()呼叫遠端API</button>
+<button class="btn btn-info" id="getJSON">以.getJSON()呼叫遠端API</button>
+<button class="btn btn-danger" id="reset">Reset</button>
+
+<div id="urlText" class="alert alert-info"></div>
+
+
+<div class="card" id="cardPanel">
+    <div class="card-header">
+        <h3 class="text-center">@DateTime.Now.Year 年度，1-12月份汽車銷售數字</h3>
+    </div>
+    <div class="card-body" id="cardBody">
+        <canvas id="chartCanvas"></canvas>
+    </div>
+    <div class="card-footer text-center">@_utility.GetBookTitle()</div>
+</div>
+
+<div id="result" class="alert alert-danger"></div>
+
+@section endJS{
+    <script>
+        var result = document.getElementById("result");
+
+        //apiUrl來自<select>控制項的<option value="...">
+        var apiUrl = "";
+
+        //以jQuery的方法Ajax呼叫遠端Controller API，取回JSON格式資料
+        $().ready(function () {
+            $("#get").click(function () {
+                $.get(apiUrl, JsonDataHandler);
+            });
+
+            $("#post").click(function () {
+                $.post(apiUrl, JsonDataHandler);
+            });
+
+            $("#getJSON").click(function () {
+                $.getJSON(apiUrl, JsonDataHandler);
+            });
+
+            hideCanvas();
+        });
+
+
+        //Ajax回呼處理function, 將response回傳的JSON資料指派給jsArray陣列
+        var jsArray = null;
+        function JsonDataHandler(response) {
+            if (response != null) {
+                //將回傳的JSON資料指定給jsArray
+                jsArray = response;
+                document.getElementById("cardPanel").style.display = "block";
+                showLineChart();    //繪製圖表
+                result.innerHTML = JSON.stringify(response);
+                result.style.display = "block";
+            }
+        }
+
+        var canvas = document.getElementById("chartCanvas");
+        //取得<canvas>畫布上的2d渲染環境(rendering context)
+        var ctx = canvas.getContext("2d");
+        var chart = null;
+
+        //繪製Chart圖表
+        function showLineChart() {
+            //摧毀先前建立的chart實例，避免快取效應
+            if (chart != null) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                    datasets: [{
+                        label: jsArray[0].car,
+                        data: jsArray[0].salesdata,
+                        lineTension: 0,
+                        fill: 'origin',
+                        backgroundColor: 'rgba(255,165,0,0.3)',
+                        borderColor: 'rgb(255,165,0)',
+                        pointStyle: "circle",
+                        pointBackgroundColor: 'rgb(0,255,0)',
+                        pointRadius: 5,
+                        pointHoverRadius: 10
+                    }, {
+                        label: jsArray[1].car,
+                        data: jsArray[1].salesdata,
+                        lineTension: 0,
+                        fill: 'origin',
+                        backgroundColor: 'rgba(0,255,255,0.5)',
+                        borderColor: 'rgb(0,255,255)',
+                        pointStyle: "triangle",
+                        pointBackgroundColor: 'rgb(0,0,0)',
+                        pointRadius: 7,
+                        pointHoverRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        fontSize: 26,
+                        text: jsArray[0].car + '與' + jsArray[1].car + '汽車銷售數字'
+                    },
+                    tooltips: {
+                        mode: 'point',
+                        intersect: true,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: '月份',
+                                fontSize: 20
+                            },
+                            ticks: {
+                                fontSize: 15
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: '單位:輛',
+                                fontSize: 20
+                            },
+                            ticks: {
+                                fontSize: 15
+                            }
+                        }]
+                    },
+                    animation: {
+                        duration: 1000
+                    }
+                }
+            });
+        }
+
+        //Reset Canvas
+        $("#reset").click(function () {
+            hideCanvas();
+        });
+
+        //隱藏元素
+        function hideCanvas() {
+            document.getElementById("cardPanel").style.display = "none";
+            result.style.display = "none";
+            result.innerHTML = "";
+            //$("#result").text("");
+        }
+
+        $("#urlSelect").ready(function () {
+            setUrl();
+        });
+
+        //select選項變化時
+        $("#urlSelect").change(function () {
+            setUrl();
+            hideCanvas();
+        });
+
+        //設定URL文字
+        function setUrl() {
+            var urlValue = $("#urlSelect").val();
+            $("#urlText").text("API URL : " + urlValue);
+            apiUrl = urlValue;
+        }
+
+            //window.onload = function () {
+            //    document.getElementById("post").addEventListener("click", function () {
+            //        clearCanvas();
+            //    });
+            //    document.getElementById("get").addEventListener("click", function () {
+            //        clearCanvas();
+            //    });
+            //    document.getElementById("getJSON").addEventListener("click", function () {
+            //        clearCanvas();
+            //    });
+            //};
+    </script>
+}
+
+@section topCSS{
+    <style>
+        .panel, #result {
+            display: none;
+        }
+
+        #urlText {
+            margin-top: 15px;
+            font-size: 20px;
+        }
+
+        #urlSelect {
+            max-width: 400px !important;
+            display: inline-block;
+        }
+    </style>
+}
+
+

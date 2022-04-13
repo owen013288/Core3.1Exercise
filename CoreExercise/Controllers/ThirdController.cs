@@ -62,5 +62,10 @@ namespace CoreExercise.Controllers
 
             return View(Locations);
         }
+
+        public IActionResult CarSalesAjaxJSON()
+        {
+            return View();
+        }
     }
 }
