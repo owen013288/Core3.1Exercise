@@ -1,0 +1,175 @@
+﻿@model List<Person>
+
+@{
+    ViewData["Title"] = "JsonIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var persons = (List<Person>)Model;
+
+    // 1.System.Text.Json - ASP.NET Core 3.0內建
+    string json1 = System.Text.Json.JsonSerializer.Serialize(persons);
+    var list1 = System.Text.Json.JsonSerializer.Deserialize<List<Person>>(json1);
+
+
+    // 2.Newtonsoft.Json
+    string json2 = Newtonsoft.Json.JsonConvert.SerializeObject(persons);
+    var list2 = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Person>>(json2);
+
+    // 3.IJsonHelper
+    string json3 = Json.Serialize(persons).ToString();
+
+    // 4.Utf8Json - 第三方的高效能JSON序列化及反序列化套件
+    // 安裝1.3.7版本Utf8Json套件
+    string json4 = Utf8Json.JsonSerializer.ToJsonString(persons);
+    var list4 = Utf8Json.JsonSerializer.Deserialize<List<Person>>(json4);
+
+
+    // 5.Jil - 第三方的高效能JSON序列化及反序列化套件
+    // 安裝2.17.0版本Jil套件
+    string json5 = Jil.JSON.Serialize(persons);
+    var list5 = Jil.JSON.Deserialize<List<Person>>(json5);
+}
+
+<div class="jumbotron alert-info">
+    <h2>JSON在.NET Core 3.1編碼與解碼</h2>
+</div>
+
+
+<div class="alert alert-primary">System.Text.Json.</div>
+<div>@json1</div>
+<hr />
+<div>@Html.Raw(json1)</div>
+
+<div class="alert alert-primary">Newtonsoft.Json</div>
+<div>@json2</div>
+
+<div class="alert alert-primary">IJsonHelper.Json</div>
+<div>@json3</div>
+
+<div class="alert alert-primary">Utf8Json</div>
+<div>@json4</div>
+
+<div class="alert alert-primary">Jil</div>
+<div>@json5</div>
+
+<hr />
+
+<div class="container">
+    <div class="jumbotron">
+        <h3>JSON陣列結構資料在JavaScript中的編碼與解碼</h3>
+    </div>
+
+    <p id="p1" class="alert alert-danger"></p>
+    <p id="p2" class="alert alert-success"></p>
+    <p id="p3" class="alert alert-info"></p>
+    <p id="p4" class="alert alert-danger"></p>
+    <p id="p5" class="alert alert-success"></p>
+    <p id="p6" class="alert alert-info"></p>
+    <p id="p7" class="alert alert-warning"></p>
+</div>
+
+@section endJS
+{
+    <script>
+        var p1 = document.getElementById("p1");
+        var p2 = document.getElementById("p2");
+        var p3 = document.getElementById("p3");
+        var p4 = document.getElementById("p4");
+        var p5 = document.getElementById("p5");
+        var p6 = document.getElementById("p6");
+        var p7 = document.getElementById("p7");
+
+        // 1.從JSON字串-->JavaScript物件
+        // 宣告JSON物件結構, values為string及number
+        var jsonPerson = '{ "firstname": "Tom", "age": 30, "city": "Taipei" }';
+
+        // 用JSON.parse()方法將JSON字串解碼還原成JavaScript Object物件
+        var jsPerson = JSON.parse(jsonPerson);
+
+        // 存取及顯示JavaScript Obecjt物件屬性值
+        // Result: Tom, 30, Taipei
+        p1.innerHTML = jsPerson.firstname + ", " + jsPerson.age + ", " + jsPerson.city;
+
+        // 2.從JavaScript物件--> JSON字串
+        // 宣告JavaScript物件
+        var jsEmployee = {
+            employee: {
+                name: "Tim",
+                height: 180,
+                bloodtype: "B"
+            }
+        };
+
+        // 用JSON.stringify()方將法JavaScript物件編碼成JSON字串
+        var jsonEmployee = JSON.stringify(jsEmployee);
+
+        // 顯示JSON字串值
+        // Result: {"employee":{"name":"Tim","height":180,"bloodtype":"B"}}
+        p2.innerHTML = jsonEmployee;
+
+        // 3.從JSON字串--> JavaScript物件
+        // 宣告JSON物件結構, values為string, number, object及array
+        var jsonMan = '{"firstname":"聖殿祭司","height":180,"address":{"通訊地址":"台北","戶籍地址":"桃園"},"phone":{"市話":"02-29881055","行動電話":"0933-852177"},"cars":["BMW","Nissan GT-R","Audi"]}';
+
+        // 用JSON.parse()方法將JSON字串解碼還原成JavaScript Object物件
+        var jsMan = JSON.parse(jsonMan);
+
+        // 存取及顯示JavaScript Object物件屬性值
+        // Result: 聖殿祭司, 180, 台北, 0933-852177, Audi
+        p3.innerHTML = jsMan.firstname + ", " + jsMan.height + ", " + jsMan.address.通訊地址 + ", " + jsMan.phone.行動電話 + ", " + jsMan.cars[2];
+
+        // 將jsMan再解碼還原成JSON字串也沒問題
+        var txtMan = JSON.stringify(jsMan);
+        // Result: {"firstname":"聖殿祭司","height":180,"address":{"通訊地址":"台北","戶籍地址":"桃園"},"phone":{"市話":"02-29881055","行動電話":"0933-852177"},"cars":["BMW","Nissan GT-R","Audi"]}
+        p4.innerHTML = txtMan;
+
+        // 5.JSON陣列結構資料--value為number
+        var jsonArray_Num = '[1, 3, 5, 7, 9]';
+        // 將JSON字串解碼還原成JavaScrip陣列
+        var jsArrayNum = JSON.parse(jsonArray_Num);
+        // 將陣列元素轉成字串，元素以逗號分隔
+        console.log(jsArrayNum.toString());
+
+        var txt = "";
+        //以forEach處理JavaScrip陣列元素
+        jsArrayNum.forEach(function (value, index) {
+            txt = txt + "index" + index + "=" + value + ", ";
+        });
+
+        p5.innerHTML = txt;
+
+        // 6.JSON陣列結構資料--value為string
+        var jsonArray_String = '["Mary", "John", "Tom"]';
+
+        // 將JSON字串解碼還原成JavaScrip陣列
+        var jsArrayString = JSON.parse(jsonArray_String);
+        p6.innerHTML = jsArrayString.join();
+
+        // 7.JSON陣列結構資料--value為object
+        var jsonArray_Object = '[' +
+            '{ "firstname": "Mary", "age": 28, "city": "New York" },' +
+            '{ "firstname": "John", "age": 36, "city": "Tokyo" },' +
+            '{ "firstname": "Tom", "age": 30, "city": "Taipei" }' +
+            ']';
+
+        // 將JSON字串解碼還原成JavaScrip陣列
+        var jsArrayObject = JSON.parse(jsonArray_Object);
+
+        // 使用Array.filter()
+        var john = jsArrayObject.filter(function (item) {
+            return item["firstname"] == "John";
+        });
+
+        p7.innerHTML = JSON.stringify(john);
+    </script>
+}
+
+@section topCSS
+{
+    <style>
+        div.alert.alert-primary {
+            margin-top: 10px;
+            border: 2px dashed black;
+        }
+    </style>
+}
