@@ -117,6 +117,8 @@ namespace CoreExercise
             // 將組態繫結至 CustomizeObj 類別
             Configuration.GetSection("CustomizeObj").Bind(options));
 
+            services.AddSingleton<IUtility, Utility>();
+
             #region 寄信配置
             // using CoreExercise.Serivce; => EmailSettings
             services.Configure<EmailSettings>(options =>
