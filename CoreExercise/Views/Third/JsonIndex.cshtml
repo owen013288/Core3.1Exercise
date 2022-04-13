@@ -15,7 +15,7 @@
     string json2 = Newtonsoft.Json.JsonConvert.SerializeObject(persons);
     var list2 = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Person>>(json2);
 
-    // 3.IJsonHelper
+    // 3.IJsonHelper => 不提供解碼
     string json3 = Json.Serialize(persons).ToString();
 
     // 4.Utf8Json - 第三方的高效能JSON序列化及反序列化套件
