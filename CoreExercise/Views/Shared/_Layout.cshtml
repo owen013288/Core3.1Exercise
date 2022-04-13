@@ -56,10 +56,10 @@
                                 <a class="nav-link text-dark ms-3" asp-area="" asp-controller="First" asp-action="Index">第一堂課</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-dark ms-3 dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link text-dark ms-3 dropdown-toggle" href="#" id="SecondnavbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     第二堂課
                                 </a>
-                                <ul class="dropdown-menu mt-2" aria-labelledby="navbarScrollingDropdown">
+                                <ul class="dropdown-menu mt-2" aria-labelledby="SecondnavbarScrollingDropdown">
                                     <li>
                                         <a class="dropdown-item" asp-controller="Second" asp-action="Index">IWebHostEnvironment學習</a>
                                     </li>
@@ -71,14 +71,27 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark ms-3 dropdown-toggle" href="#" id="ThirdnavbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    第三堂課
+                                </a>
+                                <ul class="dropdown-menu mt-2" aria-labelledby="ThirdnavbarScrollingDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Third" asp-action="Index">Razor學習</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Third" asp-action="JsonIndex">JSON學習</a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark ms-3" asp-area="" asp-controller="Friends" asp-action="Index">Controller學習</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark ms-3" asp-area="" asp-controller="AdditionalLearn" asp-action="Index">額外學習</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark ms-3" asp-controller="Third" asp-action="Index">Razor學習</a>
                             </li>
                         </ul>
                     </div>
@@ -97,13 +110,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - CoreExercise -
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/limonte-sweetalert2/sweetalert2.js"></script>
@@ -117,5 +123,6 @@
             alert('@Html.Raw(TempData["message"])');
         </script>
     }
+    @RenderSection("endJS", required: false)
 </body>
 </html>
