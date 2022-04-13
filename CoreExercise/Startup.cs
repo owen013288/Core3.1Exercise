@@ -127,6 +127,17 @@ namespace CoreExercise
                 // using CoreExercise.IService; => IEmailSender
                 .AddSingleton<IEmailSender, EmailSender>();
             #endregion
+
+            #region CROS服務
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin(); // 允許任何
+                    });
+            });
+            #endregion
         }
 
         // using Microsoft.Extensions.Logging; => ILoggerFactory
@@ -169,6 +180,9 @@ namespace CoreExercise
             // 端口路由定義
             // 使用路由
             app.UseRouting();
+
+            // 使用CROS仲介軟體 (需介於UseRouting、UseEndpoints之間)
+            app.UseCors();
 
             // 添加Identity
             // UseAuthentication 將驗證 中介軟體 新增至要求管線。
