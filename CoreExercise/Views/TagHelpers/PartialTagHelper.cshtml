@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Hero>
+
+@{
+    ViewData["Title"] = "PartialTagHelper";
+
+    ViewData["Caption"] = "英雄人物";
+
+    int counter = 1;
+}
+
+<h1>PartialTagHelper</h1>
+
+<div class="alert alert-success">@(counter++). 呼叫Partial View</div>
+<partial name="_HeroPartial" />
+
+<div class="alert alert-success">@(counter++). 呼叫Partial View, 用view-data屬性傳遞ViewData</div>
+<partial name="_HeroPartial" view-data="ViewData" />
+
+<div class="alert alert-success">@(counter++). 呼叫Partial View, 用model屬性傳遞model模型實例</div>
+<partial name="_HeroPartial" model="Model" />
+
+
+<div class="alert alert-success">@(counter++). 呼叫Partial View, 用for屬性傳遞model模型實例</div>
+<partial name="_HeroPartial" for="@Model" />
+
+<div class="alert alert-success">@(counter++). 呼叫Partial View, 同時model模型實例&傳遞ViewData</div>
+<partial name="_HeroPartial" model="@Model" view-data="ViewData" />
+
+
+@section topCSS
+{
+    <link href="~/css/hero.css" rel="stylesheet" />
+    <link href="~/css/alertbar.css" rel="stylesheet" />
+}

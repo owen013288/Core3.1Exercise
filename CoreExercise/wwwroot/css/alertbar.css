@@ -1,0 +1,8 @@
+﻿div.alert {
+    background-color: #d9edfd;
+    font-size: larger;
+    font-weight: 900;
+    border: 2px dashed black;
+    margin-top:10px;
+    margin-bottom:10px;
+}

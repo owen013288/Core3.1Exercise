@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Hero>
+
+@if (!string.IsNullOrEmpty(ViewData["Caption"].ToString()))
+{
+    <h2><span class="badge bg-danger">@ViewData["Caption"]</span></h2>
+}
+
+<div class="row">
+    @foreach (var hero in Model)
+    {
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="card">
+                <div class="headshot">
+                    <img class="card-img-top" src="~/Images/@hero.Photo" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@hero.Name</h5>
+                    <p class="card-text">@hero.Brief</p>
+                    <a href="@hero.WikiUrl" class="btn btn-primary">Wiki</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
