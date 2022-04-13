@@ -93,5 +93,33 @@ namespace CoreExercise.Controllers
 
             return View();
         }
+
+        public IActionResult SelectOptionGroup()
+        {
+            //使用此功能, 必須先初始化CountryGroupViewModel模型類別
+            var model = new CountryGroupViewModel();
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //按<select asp-for="Country" >的設定,接收參數應為string Country即可
+        //但為何設定成CountryGroupViewModel型別物件? 因為其Countries會含有六個國家的List<SelectListItem>
+        //它可用作LINQ將國家代碼轉換成國家全名, 而不必再額外初化CountryGroupViewModel物件來取得國家資訊
+        public IActionResult SelectOptionGroup(CountryGroupViewModel countryVM)
+        {
+            if (ModelState.IsValid)
+            {
+                //將國家代碼轉換成國家全名
+                var country = countryVM.Countries.Where(c => c.Value == countryVM.Country).Select(x => x.Text).FirstOrDefault();
+
+                //顯示Country名稱
+                return RedirectToAction("DisplayCountry", new { Country = country });
+            }
+
+            return View();
+        }
     }
 }
