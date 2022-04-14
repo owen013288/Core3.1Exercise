@@ -119,7 +119,6 @@ namespace CoreExercise
             Configuration.GetSection("CustomizeObj").Bind(options));
 
             services.AddSingleton<IUtility, Utility>();
-            services.AddSingleton<ICityService, TaiwanCityService>();
             services.AddTransient<IBankService, FubonBankService>();
             services.AddTransient<IZipcodeService, TaiwanZipcodeService>();
             #region 寄信配置

@@ -9,12 +9,6 @@ namespace CoreExercise.Controllers
 {
     public class TagHelpersController : Controller
     {
-        private readonly ICityService _cityService;
-        public TagHelpersController(ICityService cityService)
-        {
-            _cityService = cityService;
-        }
-
         //C# 6.0 - Auto Property Initializer
         public List<Hero> heros { get; } = new List<Hero>
         {
