@@ -16,5 +16,15 @@ namespace CoreExercise.Controllers
         {
             return View(_bankService);
         }
+
+        /// <summary>
+        /// 透過Action使用相依性注入
+        /// </summary>
+        /// <param name="myBankService"></param>
+        /// <returns></returns>
+        public IActionResult InjectAction([FromServices] IBankService myBankService)
+        {
+            return View("Balance", myBankService);
+        }
     }
 }
