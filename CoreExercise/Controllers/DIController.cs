@@ -46,5 +46,14 @@ namespace CoreExercise.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 使用相依性注入Config
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult InjectConfig()
+        {
+            return View();
+        }
     }
 }

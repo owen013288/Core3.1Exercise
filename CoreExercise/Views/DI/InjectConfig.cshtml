@@ -1,0 +1,23 @@
+﻿@inject IConfiguration configuration
+@{
+    ViewData["Title"] = "InjectConfig";
+
+    string Name = configuration["CustomizeObj:Name"];
+    string Email = configuration["CustomizeObj:Email"];
+    string Website = configuration["CustomizeObj:Website"];
+    string Other_One = configuration["CustomizeObj:Other:one"];
+    string Other_Two = configuration["CustomizeObj:Other:Two"];
+}
+
+<div class="jumbotron bg-success">
+    <h2>在View中注入Configuration組態設定</h2>
+</div>
+
+<ul>
+    <li>個人資訊</li>
+    <li>姓名： @Name</li>
+    <li>信箱： @Email</li>
+    <li>網址： @Website</li>
+    <li>其他一： @Other_One</li>
+    <li>其他二： @Other_Two</li>
+</ul>
