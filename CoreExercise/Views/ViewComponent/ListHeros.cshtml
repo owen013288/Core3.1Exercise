@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Card>
+
+@{
+    ViewData["Title"] = "View Invoke View Component";
+}
+
+<div class="jumbotron bg-info text-center">
+    <h2>View叫用HeroList檢視元件[ViewComponent(Name ="HeroList")]</h2>
+</div>
+
+
+<div class="row">
+    @*方法1*@
+    @await Component.InvokeAsync("HeroList", @Model)
+</div>
+
+@section topCSS{
+    <link href="~/css/card.css" rel="stylesheet" />
+}

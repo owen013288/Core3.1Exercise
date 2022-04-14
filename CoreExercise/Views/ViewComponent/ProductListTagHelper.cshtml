@@ -1,0 +1,20 @@
+﻿<div class="row">
+    <vc:product-list top-pricing="5">
+    </vc:product-list>
+</div>
+
+@section topCSS{
+    <style>
+        /*設定Table欄位標題顏色*/
+        th {
+            color: white;
+            background-color: black;
+            text-align: center;
+        }
+
+        /*設定Table資料列Hover時的光棒效果*/
+        .table > tbody > tr:hover {
+            background-color: antiquewhite !important;
+        }
+    </style>
+}

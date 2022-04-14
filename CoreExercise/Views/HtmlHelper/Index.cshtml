@@ -1,0 +1,199 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "SampleHelpers";
+
+    int indexer = 1;
+}
+
+<div class="jumbotron alert-success p-3">
+    <h2>常用的HTML Helpers指令</h2>
+</div>
+
+<div class="alert alert-info">@(indexer++). DisplayName() & Display()</div>
+@Html.DisplayName("Name") : @Html.Display("Name")
+<br />
+@Html.DisplayName("Nickname") : @Html.Display("Nickname")
+<br />
+
+<div class="alert alert-info">@(indexer++). DisplayNameFor() & DisplayFor()</div>
+@Html.DisplayNameFor(m => m.Email) : @Html.DisplayFor(m => m.Email)
+<br />
+
+@Html.DisplayNameFor(m => m.Terms) @Html.DisplayFor(m => m.Terms)
+<br />
+
+<div class="alert alert-info">@(indexer++). DisplayText() & DisplayTextFor()</div>
+@Html.DisplayText("Email")
+<br />
+@Html.DisplayTextFor(m => m.Terms)
+
+<div class="alert alert-info">@(indexer++). Label() & LabelFor()</div>
+@Html.Label("Name")
+<br />
+@Html.LabelFor(m => m.Nickname)
+
+<div class="alert alert-info">@(indexer++). Hidden()</div>
+<form action="" method="post">
+    @Html.Hidden("Id")
+    @Html.HiddenFor(m => m.Id)
+    @Html.EditorFor(m => m.Id)
+</form>
+
+<div class="alert alert-info">@(indexer++). TextBox() & TextBoxFor()</div>
+<form action="" method="get">
+    @Html.Label("Name") @Html.TextBox("Name") <br />
+    @Html.LabelFor(m => m.Email) @Html.TextBoxFor(m => m.Email) <br />
+</form>
+
+<div class="alert alert-info">@(indexer++). Password() & PasswordFor()</div>
+<form action="" method="post">
+    @Html.Label("Password") @Html.Password("Password") <br />
+
+    @Html.LabelFor(m => m.Password) @Html.PasswordFor(m => m.Password)
+</form>
+
+<div class="alert alert-info">@(indexer++). CheckBox() & CheckBoxFor()</div>
+<form action="" method="post">
+    @Html.Label("Terms") @Html.CheckBox("Terms", false)<br />
+
+    @Html.LabelFor(m => m.Terms) @Html.CheckBoxFor(m => m.Terms)
+</form>
+
+<div class="alert alert-info">@(indexer++). RadioButton() & RadioButtonFor()</div>
+<form action="" method="post">
+    @Html.Label("Sex")
+    @Html.RadioButton("Sex", "Female", true) 女
+    @Html.RadioButton("Sex", "Male") 男
+    @Html.RadioButton("Sex", "Other") 其他
+
+    <br />
+    @Html.LabelFor(m => m.Gender)
+    @Html.RadioButtonFor(m => m.Gender, "女性")女性
+    @Html.RadioButtonFor(m => m.Gender, "男性", new { @checked = "checked" })男性
+    @Html.RadioButtonFor(m => m.Gender, "其他")其他
+</form>
+
+<div class="alert alert-info">@(indexer++). DropDownList() & DropDownListFor()</div>
+<form action="" method="post">
+    @Html.DropDownList("City", new SelectList(new[] { "台北", "台中", "高雄" })) <br />
+
+    @{
+        List<SelectListItem> cityList = new List<SelectListItem>
+{
+            new SelectListItem{ Text = "基隆", Value = "1" },
+            new SelectListItem{ Text = "宜蘭", Value = "2" },
+            new SelectListItem{ Text = "苗粟", Value = "3", Selected = true }
+        };
+    }
+
+    @Html.DropDownList("Cities", cityList) <br />
+    @Html.DropDownListFor(m => m.City, cityList)
+
+</form>
+
+<div class="alert alert-info">@(indexer++). ListBox() & ListBoxFor()</div>
+<form action="" method="post">
+    @Html.ListBox("Commutemode", new SelectList(new string[] { "飛機", "遊艇", "地鐵" })) <br />
+
+    @{
+        List<SelectListItem> CommutermodeList = new List<SelectListItem>
+{
+            new SelectListItem{ Text = "腳踏車", Value = "1", Selected = false },
+            new SelectListItem{ Text = "機車", Value = "2", Selected = true },
+            new SelectListItem{ Text = "汽車", Value = "3", Selected = true },
+        };
+    }
+
+    @Html.ListBoxFor(m => m.Commutermode, CommutermodeList)
+</form>
+
+<div class="alert alert-info">@(indexer++). TextArea() & TextAreaFor()</div>
+<form action="" method="post">
+    <!--簡單的語法-->
+    @Html.TextArea("Comment")<br /><br />
+    @Html.TextAreaFor(m => m.Comment)<br /><br />
+
+    <!--加入相關參數-->
+    @Html.TextArea("Comment", "請輸入意見", 6, 80, new { @class = "form-control" }) <br /><br />
+    @Html.TextAreaFor(m => m.Comment, 4, 40, new { @class = "form-control" })
+</form>
+<hr />
+
+<div class="alert alert-info">@(indexer++). ValidationMessage() & ValidationMessageFor()</div>
+<form action="" method="post">
+    @Html.LabelFor(m => m.Name) : @Html.DisplayTextFor(m => m.Name) <br />
+    @Html.ValidationMessage("Name", "", new { @class = "text-danger" })
+
+    @{
+        /*
+        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+        dictionary.Add("data-val", "true");
+        dictionary.Add("data-val-required", "Sex欄位是必要項!");
+        */
+
+        Dictionary<string, object> dictionary = new Dictionary<string, object>
+{
+            { "data-val","true" },
+            { "data-val-required","Sex欄位是必要項!"}
+        };
+    }
+
+    @Html.Label("Sex")
+    @Html.RadioButton("Sex", "Female", dictionary) 女
+    @Html.RadioButton("Sex", "Male") 男
+    @Html.RadioButton("Sex", "Other") 其他
+    @Html.ValidationMessage("Sex", "", htmlAttributes: new { @class = "text-danger" })
+
+    <br />
+    @Html.LabelFor(m => m.Gender)
+    @Html.RadioButtonFor(m => m.Gender, "女性", dictionary)女性
+    @Html.RadioButtonFor(m => m.Gender, "男性")男性
+    @Html.RadioButtonFor(m => m.Gender, "其他")其他
+    @Html.ValidationMessageFor(m => m.Gender, "", htmlAttributes: new { @class = "text-danger" })
+
+    <br />
+    <input type="submit" value="submit" class="btn btn-primary" />
+
+    @{
+        string msg = @"<input type='reset' value='Reset' class='btn btn-danger' />";
+    }
+
+    @Html.Raw(msg)  @*輸出一個<input type='reset'>按鈕*@ <br />
+    @msg    @*經過HTML編碼後的純文字*@
+</form>
+
+<div class="alert alert-info">@(indexer++). ActionLink() </div>
+@{ var item = Model;}
+
+@Html.ActionLink("新增", "Create")
+@Html.ActionLink("明細", "Details", new { id = item.Id })
+@Html.ActionLink("編輯", "Edit", new { id = item.Id })
+@Html.ActionLink("刪除", "Delete", new { id = item.Id })
+@Html.ActionLink("清單", "Index", "Employees")
+
+<hr />
+@Html.ActionLink("新增", "Create", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("明細", "Details", new { id = item.Id }, new { @class = "btn btn-success" })
+@Html.ActionLink("編輯", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
+@Html.ActionLink("刪除", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+@Html.ActionLink("清單", "Index", "Employees", null, new { @class = "btn btn-info" })
+
+
+@section topCSS{
+    <style>
+        div.alert {
+            background-color: #d9edfd;
+            font-size: larger;
+            font-weight: 900;
+            border: 2px dashed black;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        select[multiple] {
+            width: 100px !important;
+        }
+    </style>
+}
+

@@ -115,5 +115,15 @@ namespace CoreExercise.Controllers
 
             return View();
         }
+
+        public IActionResult CacheTagHelper()
+        {
+            return View();
+        }
+
+        public IActionResult CustomTag()
+        {
+            return View();
+        }
     }
 }

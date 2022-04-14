@@ -1,0 +1,70 @@
+﻿@model RegisterDataAnnotations
+
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <title>AllHelpers</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        div.card-body
+        {
+            background-color:antiquewhite;
+        }
+
+
+        div.card-body > form > label {
+            width: 100px;
+            text-align: right;
+            margin-right: 0.5em;
+            padding-top: 0.2em;
+            padding-right: 1em;
+            font-weight: bold;
+            background-color: lightpink;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!--EditorFor()-->
+        <div class="card">
+            <div class="card-header alert-info">
+                <h4>Html.EditorFor()遇到不同的資料型別產生的不同控制項</h4>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.LabelFor(x => x.Id) @Html.EditorFor(x => x.Id)
+                    @Html.LabelFor(x => x.Name) @Html.EditorFor(x => x.Name)
+                    @Html.LabelFor(x => x.Password) @Html.EditorFor(x => x.Password)
+                    @Html.LabelFor(x => x.Email) @Html.EditorFor(x => x.Email)
+                    @Html.LabelFor(x => x.HomePage) @Html.EditorFor(x => x.HomePage)
+                    @Html.LabelFor(x => x.Gender) @Html.EditorFor(x => x.Gender)
+                    @Html.LabelFor(x => x.Birthday) @Html.EditorFor(x => x.Birthday)
+                    @Html.LabelFor(x => x.Birthday2) @Html.EditorFor(x => x.Birthday2)
+                    @Html.LabelFor(x => x.Money) @Html.EditorFor(x => x.Money)
+                    @Html.LabelFor(x => x.City) @Html.EditorFor(x => x.City)
+                    @Html.LabelFor(x => x.Comment) @Html.EditorFor(x => x.Comment)
+                    @Html.LabelFor(x => x.Terms) @Html.EditorFor(x => x.Terms)
+
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+
+                    @Html.ValidationSummary()
+                }
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("<br/>").insertAfter("input");
+            $("<br/>").insertAfter("textarea");
+        });
+    </script>
+</body>
+</html>

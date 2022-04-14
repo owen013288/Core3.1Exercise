@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "CacheTagHelper";
+
+    int counter = 1;
+}
+
+<div class="jumbotron">
+    <h2>Cache Tag Helper</h2>
+</div>
+
+
+<div class="alert alert-success">@(counter++).@("<cache>")快取(快取過期預設為20分鐘)</div>
+<cache>
+    目前時間: @DateTime.Now
+</cache>
+
+
+<div class="alert alert-success">@(counter++). enable啟用</div>
+<cache enabled="false">
+    目前時間: @DateTime.Now
+</cache>
+
+<div class="alert alert-success">@(counter++). expire-on指定絕對過期日期</div>
+<cache expires-on="@new DateTime(2025,3,28,12,30,0)">
+    目前時間: @DateTime.Now
+</cache>
+
+<div class="alert alert-success">@(counter++). expire-after於首次快取內容後多少時間過期(預設為20分鐘)</div>
+<cache expires-after="@TimeSpan.FromSeconds(120)">
+    目前時間: @DateTime.Now
+</cache>
+
+<div class="alert alert-success">@(counter++). expire-sliding設定快取項目的值多久未被存取就會過期</div>
+<cache expires-sliding="@TimeSpan.FromSeconds(60)">
+    目前時間: @DateTime.Now
+</cache>
+
+<div class="alert alert-success">@(counter++). vary-by-header在標頭值改變時會觸發快取重新整理</div>
+<cache vary-by-header="User-Agent">
+    目前時間: @DateTime.Now
+</cache>
+
+<div class="alert alert-success">@(counter++). vary-by-query依查詢字串的改變,而觸發快取重新整理</div>
+<cache vary-by-query="refresh,clean">
+    目前時間: @DateTime.Now
+</cache>
+
+<div class="alert alert-success">@(counter++). vary-by-route依路由參數改變,而觸發快取重新整理</div>
+<cache vary-by-route="id">
+    目前時間: @DateTime.Now
+</cache>
+
+<div class="alert alert-success">@(counter++). vary-by-cookie依cookie的改變,而觸發快取重新整理</div>
+<cache vary-by-cookie=".AspNetCore.Identity.Application">
+    目前時間: @DateTime.Now
+</cache>
+
+<div class="alert alert-success">@(counter++). vary-by-user依@User.Identity.Names改變,而觸發快取重新整理</div>
+<cache vary-by-user="true">
+    目前時間: @DateTime.Now
+</cache>
+
+<div class="alert alert-success">@(counter++). vary-by當屬性字串值所參考的物件變更,而觸發快取重新整理</div>
+<cache vary-by="@Model">
+    目前時間: @DateTime.Now
+</cache>
+
+<div class="alert alert-success">@(counter++). priority設定快取保留的優先權層級(High, Low, NeverRemove, Normal預設)</div>
+<cache priority="@Microsoft.Extensions.Caching.Memory.CacheItemPriority.High">
+    目前時間: @DateTime.Now
+</cache>
+
+
+@section topCSS
+{
+    <link href="~/css/alertbar.css" rel="stylesheet" />
+}
