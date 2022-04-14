@@ -1,0 +1,15 @@
+﻿@model IBankService
+
+@{
+    ViewData["Title"] = "Balance";
+}
+
+<div class="jumbotron">
+    <h2>網路銀行Dependency Injection相依性注入服務</h2>
+</div>
+
+<ul>
+    <li>銀行代碼 : @Model.BankId</li>
+    <li>銀行名稱 : @Model.BankName</li>
+    <li>存款餘額 : @Model.AccountBalance("18072").ToString("C")</li>
+</ul>

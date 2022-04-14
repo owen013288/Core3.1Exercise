@@ -2,6 +2,7 @@
 using CoreExercise.IService;
 using CoreExercise.Models;
 using CoreExercise.Serivce;
+using CoreExercise.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -119,7 +120,7 @@ namespace CoreExercise
 
             services.AddSingleton<IUtility, Utility>();
             services.AddSingleton<ICityService, TaiwanCityService>();
-
+            services.AddTransient<IBankService, FubonBankService>();
             #region 寄信配置
             // using CoreExercise.Serivce; => EmailSettings
             services.Configure<EmailSettings>(options =>
