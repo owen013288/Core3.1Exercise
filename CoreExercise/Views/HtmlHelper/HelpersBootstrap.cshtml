@@ -1,0 +1,104 @@
+﻿@model Register
+
+@{
+    ViewData["Title"] = "HelpersBootstrap";
+}
+
+<html>
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        div.alert {
+            background-color: #d9edfd;
+            font-size: larger;
+            font-weight: 900;
+            border: 2px dashed black;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="well">
+            <h2>HTML Helpers套用Bootstrap樣式或加入額外HTML屬性</h2>
+        </div>
+        @{
+            int indexer = 1;
+        }
+
+        <!--Html.BeginForm()-->
+        <div class="alert alert-info">@(indexer++). Html.BeginForm()</div>
+        @using (Html.BeginForm("HelpersBootstrap", "HtmlHelpers", FormMethod.Post,  new { @class = "form-horizontal", role = "form" }))
+        {
+        }
+        <del>沒有HTML文字,請直接參考HTML原始碼</del>
+        <!--Label-->
+        <div class="alert alert-info">@(indexer++). Label() & LabelFor()</div>
+        @Html.Label("Name", "Name", htmlAttributes: new { @class = "control-label", @style = "color:red" }) <br />
+        @Html.LabelFor(m => m.Name, new { @class = "control-label", @style = "color:blue" }) <br />
+
+        <!--TextBox-->
+        <div class="alert alert-info">@(indexer++). TextBox() & TextBoxFor()</div>
+        @Html.TextBox("Name", null, new { @class = "form-control", style = "background:bisque" }) <br />
+        @Html.TextBoxFor(m => m.Name, null, new { @class = "form-control", style = "background:lightblue" }) <br />
+
+        <!--Password-->
+        <div class="alert alert-info">@(indexer++). Password() & PasswordFor()</div>
+        @Html.Password("Password", null, new { @class = "form-control", style = "background:lightgreen" }) <br />
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" }) <br />
+
+        <!--CheckBox-->
+        <div class="alert alert-info">@(indexer++). CheckBox() & CheckBoxFor()</div>
+        @Html.CheckBox("Term", true, new { title = "同意否" }) 條款 <br />
+        @Html.CheckBoxFor(m => m.Terms, new { disabled = "disabled" }) 條款 <br />
+
+        <!--RadioButton-->
+        <div class="alert alert-info">@(indexer++). RadioButton() & RadioButtonFor()</div>
+        @Html.RadioButton("Gender", "女性", true, new { title = "選擇你的性別" }) 女性<br />
+        @Html.RadioButtonFor(x => x.Gender, "男性", new { id = "Male" }) 男性<br />
+
+        <!--DropDownList-->
+        <div class="alert alert-info">@(indexer++). DropDownList() & DropDownListFor()</div>
+        @Html.DropDownList("縣市", new SelectList(new[] { "台北", "台中", "高雄" }), new { style = "color:blue" })<br />
+        @Html.DropDownListFor(m => m.City, new SelectList(new[] { "彰化", "雲林", "嘉義" }), new { style = "color:purple" })<br />
+
+        <!--Editor-->
+        <div class="alert alert-info">@(indexer++). Editor() & EditorFor()</div>
+        @Html.Editor("Email", new { htmlAttributes = new { @class = "form-control", @style = "background-color:cyan" } }) <br />
+        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", @style = "background-color:lightpink" } }) <br />
+
+        <!--ListBox-->
+        <div class="alert alert-info">@(indexer++). ListBox() & ListBoxFor()</div>
+        @Html.ListBox("Commutermode", new SelectList(new[] { "機車", "汽車", "捷運" }), new { title = "通勤工具" })<br />
+        @Html.ListBoxFor(m => m.Commutermode, new SelectList(new[] { "步行", "腳踏車", "高鐡" }), new { title = "通勤方式" })<br />
+
+        <!--TextArea-->
+        <div class="alert alert-info">@(indexer++). TextArea() & TextAreaFor()</div>
+        @Html.TextArea("Comment", new { @class = "form-control", rows = "4", cols = "40", maxlength = "255", placeholder = "在這裡輸入說明" })
+        @Html.TextAreaFor(m => m.Comment, new { @class = "form-control", rows = "4", cols = "40", maxlength = "255", placeholder = "在這裡輸入意見" })
+
+        <!--ValidationMessage-->
+        <div class="alert alert-info">@(indexer++). ValidationMessage() & ValidationMessageFor()</div>
+        @Html.ValidationMessage("Name", "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-info" })
+        <del>沒有HTML文字,請直接參考HTML原始碼</del>
+
+        <!--ValidationSummary-->
+        <div class="alert alert-info">@(indexer++). ValidationSummary()</div>
+        @Html.ValidationSummary(false, "", new { @class = "text-warning" })
+        <del>沒有HTML文字,請直接參考HTML原始碼</del>
+
+        <!--ActionLink-->
+        <div class="alert alert-info">@(indexer++). ActionLink()</div>
+        @{ var item = Model;}
+
+        @Html.ActionLink("新增", "Create", null, new { @class = "btn btn-warning" })
+        @Html.ActionLink("明細", "Details", new { id = item.Id }, new { @class = "btn btn-success" })
+        @Html.ActionLink("編輯", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("刪除", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+    </div>
+</body>
+</html>
+
+
