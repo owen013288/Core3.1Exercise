@@ -26,5 +26,15 @@ namespace CoreExercise.Controllers
         {
             return View("Balance", myBankService);
         }
+
+        /// <summary>
+        /// 透過View使用相依性注入
+        /// </summary>
+        /// <param name="myBankService"></param>
+        /// <returns></returns>
+        public IActionResult InjectView()
+        {
+            return View();
+        }
     }
 }

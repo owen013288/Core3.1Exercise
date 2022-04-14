@@ -1,0 +1,15 @@
+﻿@inject IBankService bankService
+
+@{
+    ViewData["Title"] = "InjectView";
+}
+
+<div class="jumbotron">
+    <h2>在View相依性注入</h2>
+</div>
+
+<ul>
+    <li>銀行代碼 : @bankService.BankId</li>
+    <li>銀行名稱 : @bankService.BankName</li>
+    <li>存款餘額 : @bankService.AccountBalance("10872")</li>
+</ul>
