@@ -11,5 +11,7 @@ namespace CoreExercise.Models
         }
 
         public DbSet<Friends> Friends { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Sales> SalesReport { get; set; }
     }
 }
