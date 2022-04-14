@@ -27,5 +27,10 @@ namespace CoreExercise.Controllers
         {
             return View(Cards);
         }
+
+        public IActionResult ProductListTagHelper()
+        {
+            return View();
+        }
     }
 }
