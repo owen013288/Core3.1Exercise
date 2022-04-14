@@ -126,5 +126,10 @@ namespace CoreExercise.Controllers
         {
             return View();
         }
+
+        public IActionResult CustomTag()
+        {
+            return View();
+        }
     }
 }
