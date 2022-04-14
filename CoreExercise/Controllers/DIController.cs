@@ -36,5 +36,15 @@ namespace CoreExercise.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 透過View使用相依性注入-台灣區域範例
+        /// </summary>
+        /// <param name="myBankService"></param>
+        /// <returns></returns>
+        public IActionResult InjectZipCodeService()
+        {
+            return View();
+        }
     }
 }

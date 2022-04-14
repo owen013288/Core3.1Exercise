@@ -1,0 +1,16 @@
+﻿@inject IZipcodeService zipcodeService
+@{
+    ViewData["Title"] = "InjectZipcodeService";
+}
+
+<h1>將ZipcodeService注入到View</h1>
+
+<ul>
+    <li>基隆市,七堵區 Zip code : @zipcodeService.QueryZipcode("基隆市", "七堵區")</li>
+    <li>台北市,信義區 Zip code : @zipcodeService.QueryZipcode("台北市", "信義區")</li>
+    <li>新北市,板橋區 Zip code : @zipcodeService.QueryZipcode("新北市", "板橋區")</li>
+    <li>桃園市,八德區 Zip code : @zipcodeService.QueryZipcode("桃園市", "八德區")</li>
+    <li>銀河市,火星區 Zip code : @zipcodeService.QueryZipcode("銀河市", "火星區")</li>
+    <li>桃園市,火星區 Zip code : @zipcodeService.QueryZipcode("桃園市", "火星區")</li>
+</ul>
+
