@@ -39,6 +39,8 @@ namespace CoreExercise.Controllers
 
             // 傳統作法，找不到就回傳null
             ViewData["CPU_SPARC"] = _config["cpu:abcdef"];
+
+            // 用GetValue<T>方法讀取組態值
             // 新做法，找不到就傳回預設值
             ViewData["CPU_ARM"] = _config.GetValue<string>("cpu:abcdef", "找不到指定資料");
             return View();
@@ -47,14 +49,6 @@ namespace CoreExercise.Controllers
         // 在View直接注入IConfiguration相依性物件
         public IActionResult InjectConfigView()
         {
-            return View();
-        }
-
-        // 用GetValue<T>方法讀取組態值
-        public IActionResult GetValue()
-        {
-            
-
             return View();
         }
     }
