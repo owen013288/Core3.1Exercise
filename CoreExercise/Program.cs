@@ -31,6 +31,9 @@ namespace CoreExercise
 
                 // 載入自訂的 JSON 組態檔
                 config.AddJsonFile("Device.json", optional: true, reloadOnChange: true);
+
+                // 載入自訂的 JSON 組態檔
+                config.AddJsonFile("AICorp.json", optional: true, reloadOnChange: true);
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {

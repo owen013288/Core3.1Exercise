@@ -1,6 +1,8 @@
 ﻿using CoreExercise.ViewModel;
+using CoreExercise.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace CoreExercise.Controllers
 {
@@ -88,6 +90,23 @@ namespace CoreExercise.Controllers
             var device = _config.GetSection("MobileOptions").Get<DeviceViewModel>();
 
             return View("SelectedDevice", deviceVM);
+        }
+
+        // 將組態資料繫結至Object Graph
+        public IActionResult BindToObjectGraph()
+        {
+            // 1.使用Bind方法繫結
+            var AICorpVM = new AICorpViewModel();
+            _config.GetSection("AICorp").Bind(AICorpVM);
+
+            // 2.使用Get<T>()方法繫結
+            var aiCorp = _config.GetSection("AICorp").Get<AICorpViewModel>();
+
+            // 將Object Graph物件序列化成JSON字串, 交予前端顯示
+            // using Newtonsoft.Json; => JsonConvert
+            ViewData["jsonAICorp"] = JsonConvert.SerializeObject(aiCorp);
+
+            return View(aiCorp);
         }
     }
 }

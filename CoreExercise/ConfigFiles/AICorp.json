@@ -1,0 +1,22 @@
+﻿{
+  "AICorp": {
+    "Website": "https://www.aicorp.com",
+    "Branches": [
+      {
+        "Location": "USA",
+        "Name": "美國總公司",
+        "Tel": "0800-333-123"
+      },
+      {
+        "Location": "Japan",
+        "Name": "日本分公司",
+        "Tel": "0800-666-456"
+      },
+      {
+        "Location": "Franch",
+        "Name": "法國分公司",
+        "Tel": "0800-999-789"
+      }
+    ]
+  }
+}

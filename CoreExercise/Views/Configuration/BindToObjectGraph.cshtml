@@ -1,0 +1,43 @@
+﻿@model AICorpViewModel
+
+@{
+    ViewData["Title"] = "BindToObjectGraph";
+}
+
+<div class="jumbotron bg-info">
+    <h2>將組態資料繫結至Object Graph物件圖形</h2>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Branch Location</th>
+            <th>Branch Name</th>
+            <th>Branch Tel</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Branches)
+        {
+        <tr>
+            <td>@item.Location</td>
+            <td>@item.Name</td>
+            <td>@item.Tel</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<p class="alert alert-success">@ViewData["jsonAICorp"].ToString()</p>
+
+<p class="alert alert-danger">@Html.Raw(ViewData["jsonAICorp"])</p>
+
+@section topCSS
+{
+    <style>
+        table thead {
+            background-color: black;
+            color: white;
+        }
+    </style>
+}
