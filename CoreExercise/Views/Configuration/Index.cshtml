@@ -2,6 +2,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="jumbotron bg-info">
+    <h2>顯示Appsetting.json組態檔</h2>
+</div>
 
 <ul>
     <li>Website : @ViewData["Website"]</li>
@@ -39,4 +42,13 @@
     <li>AMD : @ViewData["CPU_AMD"]</li>
     <li>DRAM : @ViewData["DRAM_Kingston"]</li>
     <li>SSD : @ViewData["SSD_Samsung"]</li>
+</ul>
+
+<div class="jumbotron bg-info">
+    <h2>顯示_config.GetValue作法</h2>
+</div>
+
+<ul>
+    <li>cpu:abcdef  : @ViewData["CPU_SPARC"]</li>
+    <li>cpu:abcdef : @ViewData["CPU_ARM"]</li>
 </ul>
