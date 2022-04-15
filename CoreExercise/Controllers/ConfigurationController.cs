@@ -108,5 +108,19 @@ namespace CoreExercise.Controllers
 
             return View(aiCorp);
         }
+
+        // 將組態繫結至類別的陣列屬性
+        public IActionResult BindToArray()
+        {
+            var arrayEmps = new EmployeeViewModel();
+
+            //1.使用Bind方法繫結
+            _config.GetSection("Asia").Bind(arrayEmps);
+
+            //2.使用Get<T>()方法繫結
+            var arrayEmployees = _config.GetSection("Asia").Get<EmployeeViewModel>();
+
+            return View(arrayEmps);
+        }
     }
 }

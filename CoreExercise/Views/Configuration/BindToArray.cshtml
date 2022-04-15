@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "BindToArray";
+}
+@model EmployeeViewModel
+
+<h1>BindToArray</h1>
+
+<div class="jumbotron bg-info">
+    <h2>將組態繫結至類別的陣列屬性</h2>
+</div>
+
+<ul>
+    @foreach(var item in Model.Employees)
+    {
+        <li>@item</li>
+    }
+</ul>
