@@ -16,14 +16,20 @@ namespace CoreExercise.Controllers
         // using CoreExercise.Options; => FoodOptions
         private readonly FoodOptions _foodOptions;
 
+        private readonly DeviceOptions _deviceOptions;
+
         // using CoreExercise.Options; => IOptionsMonitor
-        public ConfigurationController(IConfiguration config, IOptionsMonitor<FoodOptions> foodOptions)
+        public ConfigurationController(IConfiguration config, 
+            IOptionsMonitor<FoodOptions> foodOptions, 
+            IOptionsMonitor<DeviceOptions> deviceOptions)
         {
             _config = config;
 
             // Option使用前,必須在DI Container中註冊
             // 利用Options Pattern從Configuration組態檔中讀入
             _foodOptions = foodOptions.CurrentValue;
+
+            _deviceOptions = deviceOptions.CurrentValue;
         }
 
         public IActionResult Index()
@@ -136,6 +142,18 @@ namespace CoreExercise.Controllers
         public IActionResult FoodWithOptions()
         {
             return View(_foodOptions);
+        }
+
+        //Select Tag Helper with Options Pattern
+        public IActionResult SelectDeviceOptions()
+        {
+            return View(_deviceOptions);
+        }
+
+        [HttpPost]
+        public IActionResult SelectDeviceOptions(DeviceOptions deviceOptions)
+        {
+            return View("DeviceOptionsResult", deviceOptions);
         }
     }
 }

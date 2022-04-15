@@ -123,6 +123,7 @@ namespace CoreExercise
             services.AddSingleton<IUtility, Utility>();
             services.AddTransient<IBankService, FubonBankService>();
             services.AddTransient<IZipcodeService, TaiwanZipcodeService>();
+            services.AddTransient<IDeviceService, ComputerService>();
             #endregion
 
             #region 寄信配置
@@ -149,7 +150,10 @@ namespace CoreExercise
 
             #region Configure注入
             services.Configure<FoodOptions>(Configuration);
-            //services.Configure<FoodOptions>(options => Configuration.GetSection("FoodOptions").Bind(options));
+            // services.Configure<FoodOptions>(options => Configuration.GetSection("FoodOptions").Bind(options));
+
+            // 將組態ComputerOptions區段繫結到DeviceOptions類別
+            services.Configure<DeviceOptions>(options => Configuration.GetSection("ComputerOptions").Bind(options));
             #endregion
         }
 

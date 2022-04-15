@@ -1,0 +1,30 @@
+﻿@model DeviceOptions
+@inject IDeviceService deviceService
+
+@{
+    ViewData["Title"] = "SelectDeviceOptions";
+}
+
+<div class="jumbotron bg-info">
+    <h1>@deviceService.ChooseCaption</h1>
+</div>
+
+<form asp-action="SelectDeviceOptions">
+    <label asp-for="Ram"></label>
+    <select asp-for="Ram" asp-items="deviceService.GetDramList().Select(x=>new SelectListItem { Text=x, Value=x })"></select>
+    <br />
+
+    <label asp-for="Cpu">CPU</label>
+    <select asp-for="Cpu" asp-items="deviceService.GetCpuList().Select(x=>new SelectListItem { Text=x, Value=x })"></select>
+    <br />
+
+    <label asp-for="Gpu">GPU</label>
+    <select asp-for="Gpu" asp-items="deviceService.GetGpuList().Select(x=>new SelectListItem { Text=x, Value=x })"></select>
+    <br />
+
+    <label asp-for="Storage">Storage</label>
+    <select asp-for="Storage" asp-items="deviceService.GetSsdList().Select(x=>new SelectListItem { Text=x, Value=x })"></select>
+    <br />
+
+    <button type="submit">Submit</button>
+</form>
