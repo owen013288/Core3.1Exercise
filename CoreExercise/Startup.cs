@@ -149,6 +149,7 @@ namespace CoreExercise
 
             #region Configure注入
             services.Configure<FoodOptions>(Configuration);
+            //services.Configure<FoodOptions>(options => Configuration.GetSection("FoodOptions").Bind(options));
             #endregion
         }
 
