@@ -1,7 +1,8 @@
-﻿using CoreExercise.ViewModel;
-using CoreExercise.ViewModels;
+﻿using CoreExercise.Options;
+using CoreExercise.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace CoreExercise.Controllers
@@ -11,9 +12,18 @@ namespace CoreExercise.Controllers
         // Configuration相依性注入設定
         // using Microsoft.Extensions.Configuration; => IConfiguration
         private readonly IConfiguration _config;
-        public ConfigurationController(IConfiguration config)
+
+        // using CoreExercise.Options; => FoodOptions
+        private readonly FoodOptions _foodOptions;
+
+        // using CoreExercise.Options; => IOptionsMonitor
+        public ConfigurationController(IConfiguration config, IOptionsMonitor<FoodOptions> foodOptions)
         {
             _config = config;
+
+            // Option使用前,必須在DI Container中註冊
+            // 利用Options Pattern從Configuration組態檔中讀入
+            _foodOptions = foodOptions.CurrentValue;
         }
 
         public IActionResult Index()
@@ -121,6 +131,11 @@ namespace CoreExercise.Controllers
             var arrayEmployees = _config.GetSection("Asia").Get<EmployeeViewModel>();
 
             return View(arrayEmps);
+        }
+
+        public IActionResult FoodWithOptions()
+        {
+            return View(_foodOptions);
         }
     }
 }

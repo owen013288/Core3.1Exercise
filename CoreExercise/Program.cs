@@ -49,6 +49,9 @@ namespace CoreExercise
 
                 // 將Dictionary<TKey,TValue>集合加入組態
                 config.AddInMemoryCollection(DictEmployees);
+
+                // 載入自訂的 JSON 組態檔
+                config.AddJsonFile("Food.json", optional: true, reloadOnChange: true);
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {

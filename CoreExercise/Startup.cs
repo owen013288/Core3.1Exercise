@@ -1,6 +1,7 @@
 ﻿using CoreExercise.Helper;
 using CoreExercise.IService;
 using CoreExercise.Models;
+using CoreExercise.Options;
 using CoreExercise.Serivce;
 using CoreExercise.Services;
 using Microsoft.AspNetCore.Builder;
@@ -113,6 +114,7 @@ namespace CoreExercise
             });
             #endregion
 
+            #region DI注入
             // 在DI Container 中註冊CustomizeObj類別
             services.Configure<CustomizeObj>(options =>
             // 將組態繫結至 CustomizeObj 類別
@@ -121,6 +123,8 @@ namespace CoreExercise
             services.AddSingleton<IUtility, Utility>();
             services.AddTransient<IBankService, FubonBankService>();
             services.AddTransient<IZipcodeService, TaiwanZipcodeService>();
+            #endregion
+
             #region 寄信配置
             // using CoreExercise.Serivce; => EmailSettings
             services.Configure<EmailSettings>(options =>
@@ -141,6 +145,10 @@ namespace CoreExercise
                         builder.AllowAnyOrigin(); // 允許任何
                     });
             });
+            #endregion
+
+            #region Configure注入
+            services.Configure<FoodOptions>(Configuration);
             #endregion
         }
 

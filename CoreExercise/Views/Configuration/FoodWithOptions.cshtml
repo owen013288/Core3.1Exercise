@@ -1,0 +1,15 @@
+﻿@model FoodOptions
+@{
+    ViewData["Title"] = "FoodWithOptions";
+}
+
+<div class="jumbotron bg-info">
+    <h1>今日套餐</h1>
+</div>
+
+<ul>
+    <li>開胃菜 : @Model.Appetizer</li>
+    <li>主菜 : @Model.MainCourse</li>
+    <li>甜點 : @Model.Dessert</li>
+    <li>飲料 : @Model.Beverage</li>
+</ul>
