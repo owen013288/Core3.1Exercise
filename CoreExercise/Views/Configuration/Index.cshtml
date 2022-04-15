@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul>
+    <li>Website : @ViewData["Website"]</li>
+    <li>台北分支名稱: @ViewData["Taipei_Name"]</li>
+    <li>台北分支電話 : @ViewData["Taipei_Tel"]</li>
+</ul>
+
+<div class="jumbotron bg-info">
+    <h2>顯示自訂FutureCorp.json組態檔</h2>
+</div>
+
+<ul>
+    <li>網站 : @ViewData["Website1"]</li>
+    <li>分支 : @ViewData["USA_Name"]</li>
+    <li>電話 : @ViewData["USA_Tel"]</li>
+</ul>
+
+<div class="jumbotron bg-info">
+    <h2>顯示自訂Mobile.ini組態檔</h2>
+</div>
+
+<ul>
+    <li>CPU  : @ViewData["CPU_Name"]</li>
+    <li>設計 : @ViewData["CPU_Designer"]</li>
+    <li>製造 : @ViewData["CPU_Manufacturer"]</li>
+    <li>儲存 : @ViewData["iPhone11Pro_storage"]</li>
+</ul>
+
+<div class="jumbotron bg-info">
+    <h2>顯示自訂Computer.xml組態檔</h2>
+</div>
+
+<ul>
+    <li>INETL  : @ViewData["CPU_Intel"]</li>
+    <li>AMD : @ViewData["CPU_AMD"]</li>
+    <li>DRAM : @ViewData["DRAM_Kingston"]</li>
+    <li>SSD : @ViewData["SSD_Samsung"]</li>
+</ul>

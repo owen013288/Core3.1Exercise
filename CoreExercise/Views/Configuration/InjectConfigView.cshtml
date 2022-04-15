@@ -1,0 +1,23 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration configuration
+
+@{
+    string Website = configuration["Company:Website"];
+    string Taipei_Name = configuration["Company:Branches:Taipei:Name"];
+    string Taipei_Tel = configuration["Company:Branches:Taipei:Tel"];
+    string Taichung_Name = configuration["Company:Branches:Taichung:Name"];
+    string Taichung_Tel = configuration["Company:Branches:Taichung:Tel"];
+    string Kaohsiung_Name = configuration["Company:Branches:Kaohsiung:Name"];
+    string Kaohsiung_Tel = configuration["Company:Branches:Kaohsiung:Tel"];
+}
+
+<div class="jumbotron bg-success">
+    <h2>在View中注入Configuration組態設定</h2>
+</div>
+
+<ul>
+    <li>公司網站 : @Website</li>
+    <li>@Taipei_Name , 電話 : @Taipei_Tel</li>
+    <li>@Taichung_Name , 電話 : @Taichung_Tel</li>
+    <li>@Kaohsiung_Name , 電話 : @Kaohsiung_Tel</li>
+</ul>

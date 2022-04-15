@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <cpu>
+    <intel>Core i9-9900K</intel>
+    <amd>Ryzen 7-3800X</amd>
+  </cpu>
+  <dram>
+    <kingston>金士頓 16GB 2400MHz DDR4</kingston>
+    <micron>Micron Ballistix Sport LT競技版 D4 3000/ 16G</micron>
+    <corsair>海盜船 Vengeance RGB PRO DDR4 3000 8GBx2</corsair>
+  </dram>
+  <ssd>
+    <samsung>三星 970 EVO 1TB NVMe M.2 2280</samsung>
+    <wd>WD SSD 1TB 2.5吋 3D NAND固態硬碟</wd>
+    <micron>Micron Crucial MX500 1TB SATAⅢ</micron>
+  </ssd>
+</configuration>

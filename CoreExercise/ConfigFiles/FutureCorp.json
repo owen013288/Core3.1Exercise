@@ -1,0 +1,19 @@
+﻿{
+  "FutureCorp": {
+    "Website": "https://www.futurecorp.com.tw",
+    "Branches": {
+      "USA": {
+        "Name": "美國總公司",
+        "Tel": "0800-333-123"
+      },
+      "Japan": {
+        "Name": "日本分公司",
+        "Tel": "0800-666-456"
+      },
+      "France": {
+        "Name": "法國分公司",
+        "Tel": "0800-999-789"
+      }
+    }
+  }
+}
