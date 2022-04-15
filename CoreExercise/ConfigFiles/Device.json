@@ -1,0 +1,14 @@
+{
+  "ComputerOptions": {
+    "Ram": "32GB",
+    "Cpu": "AMD",
+    "Gpu": "AMD",
+    "Storage": "Micron"
+  },
+  "MobileOptions": {
+    "Ram": "6GB",
+    "Cpu": "Samsung",
+    "Gpu": "AdrenoTM 640 GPU",
+    "Storage": "512GB"
+  }
+}

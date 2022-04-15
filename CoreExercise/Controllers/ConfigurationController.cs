@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoreExercise.ViewModel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace CoreExercise.Controllers
@@ -50,6 +51,43 @@ namespace CoreExercise.Controllers
         public IActionResult InjectConfigView()
         {
             return View();
+        }
+
+        // 用GetSection()方法取得組態的sub-section
+        public IActionResult GetSection()
+        {
+            var corp = _config.GetSection("FutureCorp");
+            var website = _config.GetSection("FutureCorp:Website");
+            var branches = _config.GetSection("FutureCorp:Branches");
+            var usa = _config.GetSection("FutureCorp:Branches:USA");
+            var usa_name = _config.GetSection("FutureCorp:Branches:USA:Name");
+
+            var corp_children = corp.GetChildren();
+            var website_children = website.GetChildren();
+            var branches_children = branches.GetChildren();
+            var usa_children = usa.GetChildren();
+            var usa_name_children = usa_name.GetChildren();
+
+            var corp_Enumerable = corp.AsEnumerable();
+            var website_Enumerable = website.AsEnumerable();
+            var branches_Enumerable = branches.AsEnumerable();
+            var usa_Enumerable = usa.AsEnumerable();
+            var usa_name_Enumerable = usa_name.AsEnumerable();
+
+            return View();
+        }
+
+        // 將組態資料繫結至類別
+        public IActionResult BindToClass()
+        {
+            // 1.使用Bind方法繫結
+            var deviceVM = new DeviceViewModel();
+            _config.GetSection("MobileOptions").Bind(deviceVM);
+
+            // 2.使用Get<T>()方法繫結
+            var device = _config.GetSection("MobileOptions").Get<DeviceViewModel>();
+
+            return View("SelectedDevice", deviceVM);
         }
     }
 }

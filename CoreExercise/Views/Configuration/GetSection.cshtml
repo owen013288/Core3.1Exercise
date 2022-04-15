@@ -1,0 +1,79 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration config
+
+@{
+    ViewData["Title"] = "GetSection";
+
+    // GetSection()
+    var corp = config.GetSection("FutureCorp");
+    var website = config.GetSection("FutureCorp:Website");
+    var branches = config.GetSection("FutureCorp:Branches");
+    var usa = config.GetSection("FutureCorp:Branches:USA");
+    var usa_name = config.GetSection("FutureCorp:Branches:USA:Name");
+
+    // GetChildren()
+    var corp_children = corp.GetChildren();
+    var website_children = website.GetChildren();
+    var branches_children = branches.GetChildren();
+    var usa_children = usa.GetChildren();
+    var usa_name_children = usa_name.GetChildren();
+
+    // AsEnumerable()
+    var corp_Enumerable = corp.AsEnumerable();
+    var website_Enumerable = website.AsEnumerable();
+    var branches_Enumerable = branches.AsEnumerable();
+    var usa_Enumerable = usa.AsEnumerable();
+    var usa_name_Enumerable = usa_name.AsEnumerable();
+}
+
+<div class="jumbotron bg-info">
+    <h2>GetSection() & GetChildren()方法</h2>
+    <h2>@corp</h2>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var child in corp_children)
+        {
+            var section = child.AsEnumerable();
+            
+            @foreach (var item in section)
+            {
+                <tr>
+                    <td>@item.Key</td>
+                    <td>@(item.Value ?? "--沒有資料--")</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in corp_Enumerable)
+        {
+            <tr>
+                <td>@item.Key</td>
+                <td>@item.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section topCSS
+{
+    <link href="~/css/TableCaptionBlack.css" rel="stylesheet" />
+}

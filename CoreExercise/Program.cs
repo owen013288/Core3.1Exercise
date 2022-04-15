@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Hosting;
+ï»¿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.IO;
@@ -20,14 +20,17 @@ namespace CoreExercise
                 // using System.IO; => Path
                 config.AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(),
                     "appsettings.json"), true, true);
-                // §ïÅÜ°ò©³¸ô®|³]©w
+                // æ”¹è®ŠåŸºåº•è·¯å¾‘è¨­å®š
                 config.SetBasePath(Directory.GetCurrentDirectory() + "/ConfigFiles/");
-                // ¸ü¤J¦Û­qªº JSON ²ÕºAÀÉ
+                // è¼‰å…¥è‡ªè¨‚çš„ JSON çµ„æ…‹æª”
                 config.AddJsonFile("FutureCorp.json", optional: true, reloadOnChange: true);
-                // ¸ü¤J¦Û­qªº INI ²ÕºAÀÉ
+                // è¼‰å…¥è‡ªè¨‚çš„ INI çµ„æ…‹æª”
                 config.AddIniFile("Mobile.ini", optional: true, reloadOnChange: true);
-                // ¸ü¤J¦Û­qªº XML ²ÕºAÀÉ
+                // è¼‰å…¥è‡ªè¨‚çš„ XML çµ„æ…‹æª”
                 config.AddXmlFile("Computer.xml", optional: true, reloadOnChange: true);
+
+                // è¼‰å…¥è‡ªè¨‚çš„ JSON çµ„æ…‹æª”
+                config.AddJsonFile("Device.json", optional: true, reloadOnChange: true);
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {
