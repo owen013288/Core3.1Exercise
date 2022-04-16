@@ -35,9 +35,17 @@ namespace CoreExercise
             // using CoreExercise.Models; => ApplicationDbContext
             // using Microsoft.EntityFrameworkCore; => UseSqlServer
             // using Microsoft.AspNetCore.Identity; => IdentityUser
+
+            // appsettings 使用以下
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("ExerciseConnection")));
+
+            // 使用 user-secrets 要改成以下
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("ExerciseConnection")));
+                    Configuration["ExerciseConnection"]));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
